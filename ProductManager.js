@@ -42,14 +42,14 @@ class ProductManager {
         return isValid;
     }
 
-    addProducts(title, description, price, thumbnail, code, stock) {
+    addProducts(prod) {
         let product = {
-            title: title,
-            description: description,
-            price: price,
-            thumbnail: thumbnail,
-            code: code,
-            stock: stock,
+            title: prod.title,
+            description: prod.description,
+            price: prod.price,
+            thumbnail: prod.thumbnail,
+            code: prod.code,
+            stock: prod.stock,
             id: this.#id+1,
         }
 
@@ -80,9 +80,18 @@ let prodPrueba = {
     stock: 25
 }
 
+let prodPrueba2 = {
+    title: 'camiseta',
+    description: 'camiseta argentina talle M',
+    price: 4000,
+    thumbnail: 'Sin imagen',
+    code: 'abc124',
+    stock: 10
+}
+
 console.log(`Lista vacia : ${productManager.getProducts()}`);
 
-console.log(productManager.addProducts('producto prueba', 'Este es un producto de prueba', 200, 'Sin imagen', 'abc123', 25));
-console.log(productManager.addProducts('camiseta', 'camiseta argentina talle M', 4000, 'Sin imagen', 'abc124', 10));
+console.log(productManager.addProducts(prodPrueba));
+console.log(productManager.addProducts(prodPrueba2));
 productManager.getProductById(3);
 console.log(...productManager.getProducts());
