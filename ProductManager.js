@@ -33,7 +33,7 @@ class ProductManager {
         let isValid = true;
         let fields = Object.values(product);
 
-        fields.forEach(field => { // Chequear con .values
+        fields.forEach(field => {
             if(field == null || field == '' || field == undefined) {
                 isValid = false;
             }
