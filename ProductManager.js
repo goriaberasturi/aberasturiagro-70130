@@ -82,24 +82,29 @@ class ProductManager {
         await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2), 'utf-8');
     }
     
-    async updateProduct(id, ...fields) {
-        const product = await this.getProductById(id);
+    async updateProduct(id, fields) {
+        const products = await this.getProducts();
+        let product = await this.getProductById(id);
 
         if (!this.fieldValidated(fields)) return 'There is an empty field';
 
-        if(fields.entries.includes('code')) {
+        if(Object.keys(fields).includes('code')) {
             if(await this.getProductByCode(fields.code)) return 'This code is already registered';
         }
 
-        for(fld of fields) {
-            product.fld = fields.fld;
-        }
+        const updatedProduct = {...product, ...fields, id};
+
+        const index = products.find(prod => prod.id === updatedProduct.id);
+
+        products[index] = updatedProduct;
+        products.push(product);
+        await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2), 'utf-8');
     }
 }
 
 const productManager = new ProductManager('./products.json');
 
-let prodPrueba = {
+const prodPrueba = {
     title: 'producto prueba',
     description: 'Este es un producto de prueba',
     price: 200,
@@ -108,13 +113,19 @@ let prodPrueba = {
     stock: 25
 }
 
-let prodPrueba2 = {
+const prodPrueba2 = {
     title: 'camiseta',
     description: 'camiseta argentina talle M',
     price: 4000,
     thumbnail: 'Sin imagen',
     code: 'abc124',
     stock: 10
+}
+
+const campos = {
+    description: 'camiseta argentina talle S',
+    price: 7000,
+    stock: 15
 }
 
 const test = async () => {
@@ -128,11 +139,13 @@ const test = async () => {
     await productManager.addProducts(prodPrueba2);
     listado = await productManager.getProducts();
     console.log(`Agregado producto 2 : ${listado}`);
-
+    
     let prod = await productManager.getProductById(2);
     console.log(prod);
-
-    // console.log(productManager.getProducts());
+    
+    await productManager.updateProduct(2, campos);
+    listado = await productManager.getProducts();
+    console.log(`Actualizado producto 2 : ${listado}`);
 }
 
 test();

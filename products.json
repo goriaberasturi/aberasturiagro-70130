@@ -16,5 +16,14 @@
     "code": "abc124",
     "stock": 10,
     "id": 2
+  },
+  {
+    "title": "camiseta",
+    "description": "camiseta argentina talle M",
+    "price": 4000,
+    "thumbnail": "Sin imagen",
+    "code": "abc124",
+    "stock": 10,
+    "id": 2
   }
 ]
