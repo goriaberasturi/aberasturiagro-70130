@@ -1,0 +1,20 @@
+[
+  {
+    "title": "producto prueba",
+    "description": "Este es un producto de prueba",
+    "price": 200,
+    "thumbnail": "Sin imagen",
+    "code": "abc123",
+    "stock": 25,
+    "id": 1
+  },
+  {
+    "title": "camiseta",
+    "description": "camiseta argentina talle M",
+    "price": 4000,
+    "thumbnail": "Sin imagen",
+    "code": "abc124",
+    "stock": 10,
+    "id": 2
+  }
+]
