@@ -48,7 +48,7 @@ class ProductManager {
         }
     }
 
-    fieldValidated(product) {
+    async fieldValidated(product) {
         let isValid = true;
         let fields = Object.values(product);
 
@@ -85,8 +85,9 @@ class ProductManager {
     async updateProduct(id, fields) {
         const products = await this.getProducts();
         let product = await this.getProductById(id);
+        const fieldValid = await this.fieldValidated(fields);
 
-        if (!this.fieldValidated(fields)) return 'There is an empty field';
+        if (!fieldValid) return 'There is an empty field';
 
         if(Object.keys(fields).includes('code')) {
             if(await this.getProductByCode(fields.code)) return 'This code is already registered';
@@ -94,10 +95,10 @@ class ProductManager {
 
         const updatedProduct = {...product, ...fields, id};
 
-        const index = products.find(prod => prod.id === updatedProduct.id);
-
+        const index = products.findIndex(prod => prod.id === updatedProduct.id);
+        
         products[index] = updatedProduct;
-        products.push(product);
+
         await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2), 'utf-8');
     }
 }
