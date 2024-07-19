@@ -1,38 +1,11 @@
 [
   {
-    "title": "producto prueba",
-    "description": "Este es un producto de prueba",
-    "price": 200,
+    "title": "Impresora Epson FX-390 II",
+    "description": "Impresora de matriz de puntos Epson FX-390 II",
+    "price": 470000,
     "thumbnail": "Sin imagen",
     "code": "abc123",
     "stock": 25,
     "id": 1
-  },
-  {
-    "title": "camiseta",
-    "description": "camiseta argentina talle S",
-    "price": 8000,
-    "thumbnail": "Sin imagen",
-    "code": "abc124",
-    "stock": 17,
-    "id": 2
-  },
-  {
-    "title": "vuvuzela",
-    "description": "camiseta argentina talle S",
-    "price": 1200,
-    "thumbnail": "Sin imagen",
-    "code": "aaa111",
-    "stock": 13,
-    "id": 3
-  },
-  {
-    "title": "producto prueba",
-    "description": "Este es un producto de prueba",
-    "price": 3000,
-    "thumbnail": "Sin imagen",
-    "code": "ab234",
-    "stock": 2,
-    "id": 4
   }
 ]
