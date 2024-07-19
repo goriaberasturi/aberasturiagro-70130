@@ -1,0 +1,92 @@
+[
+  {
+    "title": "Fertilizante Liquido Mist-N",
+    "description": "Nitrógeno: 14.5% Calcio: 6.5% Magnesio: 1.5% Azufre: 2.5%",
+    "price": 19,
+    "thumbnail": "Sin imagen",
+    "code": "aaa001",
+    "stock": 25,
+    "id": 1
+  },
+  {
+    "title": "Surcostart",
+    "description": "10,5 - 37 + Azufre + Zinc GR",
+    "price": null,
+    "thumbnail": "Sin imagen",
+    "code": "aaa002",
+    "stock": 25,
+    "id": 2
+  },
+  {
+    "title": "Nutrition Amonio Sulfato De Amonio",
+    "description": "Composición Nitrógeno amoniacal (N) 21% Azufre de sulfatos (S) 24%",
+    "price": null,
+    "thumbnail": "Sin imagen",
+    "code": "aaa003",
+    "stock": 25,
+    "id": 3
+  },
+  {
+    "title": "Silo Bolsa Ipesasilo 9 X 60 Mts",
+    "description": "Las bolsas IpesaSilo se fabrican bajo normas de calidad ISO 9001/2000, asegurando además el cuidado del medio ambiente a través de la certificación ISO 140001/2004.",
+    "price": 454,
+    "thumbnail": "Sin imagen",
+    "code": "aaa004",
+    "stock": 25,
+    "id": 4
+  },
+  {
+    "title": "Semilla Maiz Km 60-050 Vip3/full/hr",
+    "description": "Es el híbrido con mayor potencial y producción de materia seca digestible, permitiendo una producción de más leche y más carne por hectárea.",
+    "price": 140,
+    "thumbnail": "Sin imagen",
+    "code": "aaa005",
+    "stock": 25,
+    "id": 5
+  },
+  {
+    "title": "Bioestimulante Vitagrow Ts",
+    "description": "SL (Concentrado soluble)",
+    "price": 19,
+    "thumbnail": "Sin imagen",
+    "code": "aaa006",
+    "stock": 25,
+    "id": 6
+  },
+  {
+    "title": "Curasemilla Compinche Sx",
+    "description": "SC (Suspensión concentrada)",
+    "price": 42,
+    "thumbnail": "Sin imagen",
+    "code": "aaa007",
+    "stock": 25,
+    "id": 7
+  },
+  {
+    "title": "Urea Granulada A Granel",
+    "description": "Grado 46-0-0",
+    "price": 580,
+    "thumbnail": "Sin imagen",
+    "code": "aaa008",
+    "stock": 25,
+    "id": 8
+  },
+  {
+    "title": "Sorgo Forrajero Talisman Bmr",
+    "description": "sorgo Sudax- Nervadura Marron con excelente capacidad de rebrote.  ",
+    "price": null,
+    "thumbnail": "Sin imagen",
+    "code": "aaa009",
+    "stock": 25,
+    "id": 9
+  },
+  {
+    "title": "Acento Induxor",
+    "description": "Acento Induxor es un fungicida sistémico y de contacto con efectos preventivos, curativos y erradicantes.",
+    "price": null,
+    "thumbnail": "Sin imagen",
+    "code": "aaa010",
+    "stock": 25,
+    "id": 10
+  }
+]

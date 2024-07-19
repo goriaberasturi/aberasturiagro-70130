@@ -1,6 +1,4 @@
-const { error } = require('console');
-const fs = require('fs');
-const { title } = require('process');
+import fs from 'fs';
 
 class ProductManager {
     #id = 0;
@@ -153,29 +151,14 @@ const prodPrueba = {
     description: 'Este es un producto prueba',
     price: 200,
     thumbnail: 'Sin imagen',
-    code: 'abcd1234',
+    code: 'abc123',
     stock: 25
 }
 
 const campos = {
     title: 'Impresora Epson FX-390 II',
     description: 'Impresora de matriz de puntos Epson FX-390 II',
-    price: 470000,
-    code: 'abcd1234'
+    price: 470000
 }
 
-const test = async () => {
-    // console.log(await productManager.getProducts());
-
-    await productManager.addProducts(prodPrueba);
-    // console.log(await productManager.getProducts());
-
-    // const [prod] = await productManager.getProductById(0);
-    // console.log(prod);
-
-    // await productManager.updateProduct(1, campos);
-
-    // await productManager.deleteProduct(1);
-}
-
-test();
+export default ProductManager;
