@@ -35,7 +35,7 @@ class ProductManager {
             if (product) {
                 return [product, products];
             } else {
-                throw new Error('Product not found');
+                throw new Error('Product ID was not found');
             }
 
         } catch (error) {
@@ -129,19 +129,18 @@ class ProductManager {
 
     async deleteProduct(id) {
         try {
-            const [product, products] = await this.getProductById(id);
-    
-            if (product) {
-                const index = products.findIndex(prod => prod.id === id);
-                products.splice(index, 1);
-    
-                await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2), 'utf-8');
-    
-            } else {
-                return console.log('Product not found');
-            }
+            const products = await this.getProducts();
+            const index = products.findIndex(prod => prod.id === id);
 
-        } catch(error) {
+            if (index == -1) {
+                throw new Error('Product ID was not found')
+            } else {
+                products.splice(index, 1);
+
+                await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2), 'utf-8');
+            };
+
+        } catch (error) {
             console.log(error);
         }
     }
@@ -168,7 +167,7 @@ const campos = {
 const test = async () => {
     // console.log(await productManager.getProducts());
 
-    // await productManager.addProducts(prodPrueba);
+    await productManager.addProducts(prodPrueba);
     // console.log(await productManager.getProducts());
 
     // const [prod] = await productManager.getProductById(0);
@@ -176,7 +175,7 @@ const test = async () => {
 
     // await productManager.updateProduct(1, campos);
 
-    await productManager.deleteProduct(2);
+    // await productManager.deleteProduct(1);
 }
 
 test();

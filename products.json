@@ -1,10 +1,10 @@
 [
   {
-    "title": "Impresora Epson FX-390 II",
-    "description": "Impresora de matriz de puntos Epson FX-390 II",
-    "price": 470000,
+    "title": "producto prueba",
+    "description": "Este es un producto prueba",
+    "price": 200,
     "thumbnail": "Sin imagen",
-    "code": "abc123",
+    "code": "abcd1234",
     "stock": 25,
     "id": 1
   }
