@@ -11,10 +11,28 @@
   {
     "title": "camiseta",
     "description": "camiseta argentina talle S",
-    "price": 7000,
+    "price": 8000,
     "thumbnail": "Sin imagen",
     "code": "abc124",
-    "stock": 15,
+    "stock": 17,
     "id": 2
+  },
+  {
+    "title": "vuvuzela",
+    "description": "camiseta argentina talle S",
+    "price": 1200,
+    "thumbnail": "Sin imagen",
+    "code": "aaa111",
+    "stock": 13,
+    "id": 3
+  },
+  {
+    "title": "producto prueba",
+    "description": "Este es un producto de prueba",
+    "price": 3000,
+    "thumbnail": "Sin imagen",
+    "code": "ab234",
+    "stock": 2,
+    "id": 4
   }
 ]

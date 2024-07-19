@@ -4,7 +4,15 @@ class ProductManager {
     #id = 0;
 
     constructor(path) {
+        this.initializeId();
         this.path = path;
+    }
+
+    async initializeId() {
+        const products = await this.getProducts();
+        if (products.length > 0) {
+            this.#id = Math.max(...products.map(prod => prod.id));
+        }
     }
 
     async getProducts() {
@@ -25,26 +33,27 @@ class ProductManager {
             if (product) {
                 return product;
             } else {
-                return console.error('Not found');
+                return undefined;
             }
 
         } catch (error) {
-            return {};
+            return [];
         }
     }
 
-    async getProductByCode(code) {
+    async codeValidated(code) {
         try {
             const products = await this.getProducts();
             const product = products.find(product => product.code == code);
 
             if (product) {
-                return product;
+                return false;
             } else {
-                return console.error('Not found');
+                return true;
             }
+
         } catch (error) {
-            return {};
+            return error;
         }
     }
 
@@ -53,7 +62,7 @@ class ProductManager {
         let fields = Object.values(product);
 
         fields.forEach(field => {
-            if (field == null || field == '' || field == undefined) {
+            if (field === null || field === '' || field == undefined) {
                 isValid = false;
             }
         });
@@ -62,6 +71,8 @@ class ProductManager {
     }
 
     async addProducts(prod) {
+        await this.initializeId();
+        
         const product = {
             title: prod.title,
             description: prod.description,
@@ -72,34 +83,41 @@ class ProductManager {
             id: this.#id + 1,
         }
 
-        if (!this.fieldValidated(product)) return 'There is an empty field';
-        
-        if (await this.getProductByCode(product.code)) return 'Theres is already a product with this code';
-        
+        const fieldValid = await this.fieldValidated(product);
+        const codeValid = await this.codeValidated(product.code);
+
+        if (!fieldValid) return console.log('There is an empty field');
+
+        if (!codeValid) return console.log('Theres is already a product with this code');
+
         const products = await this.getProducts();
         products.push(product);
         this.#id++;
         await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2), 'utf-8');
     }
-    
+
     async updateProduct(id, fields) {
         const products = await this.getProducts();
         let product = await this.getProductById(id);
-        const fieldValid = await this.fieldValidated(fields);
 
-        if (!fieldValid) return 'There is an empty field';
+        if (product) {
+            const fieldValid = await this.fieldValidated(fields);
 
-        if(Object.keys(fields).includes('code')) {
-            if(await this.getProductByCode(fields.code)) return 'This code is already registered';
+            if (!fieldValid) return console.log('There is an empty field');
+
+            if (Object.keys(fields).includes('code')) {
+                if (await this.codeValidated(fields.code)) return 'This code is already registered';
+            }
+
+            const updatedProduct = { ...product, ...fields, id };
+
+            const index = products.findIndex(prod => prod.id === updatedProduct.id);
+            products[index] = updatedProduct;
+
+            await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2), 'utf-8');
+        } else {
+            return console.log('Product not found');
         }
-
-        const updatedProduct = {...product, ...fields, id};
-
-        const index = products.findIndex(prod => prod.id === updatedProduct.id);
-        
-        products[index] = updatedProduct;
-
-        await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2), 'utf-8');
     }
 }
 
@@ -110,43 +128,24 @@ const prodPrueba = {
     description: 'Este es un producto de prueba',
     price: 200,
     thumbnail: 'Sin imagen',
-    code: 'abc123',
+    code: 'ab234',
     stock: 25
 }
 
-const prodPrueba2 = {
-    title: 'camiseta',
-    description: 'camiseta argentina talle M',
-    price: 4000,
-    thumbnail: 'Sin imagen',
-    code: 'abc124',
-    stock: 10
-}
-
 const campos = {
-    description: 'camiseta argentina talle S',
-    price: 7000,
-    stock: 15
+    price: 3000,
+    stock: 2,
 }
 
 const test = async () => {
-    let listado = await productManager.getProducts();
-    console.log(`Lista vacia : ${listado}`);
-    
-    await productManager.addProducts(prodPrueba);
+    // await productManager.addProducts(prodPrueba);
+
+    // let prod = await productManager.getProductById(1);
+    // console.log(prod);
+
+    await productManager.updateProduct(4, campos);
     listado = await productManager.getProducts();
-    console.log(`Agregado producto 1 : ${listado}`);
-    
-    await productManager.addProducts(prodPrueba2);
-    listado = await productManager.getProducts();
-    console.log(`Agregado producto 2 : ${listado}`);
-    
-    let prod = await productManager.getProductById(2);
-    console.log(prod);
-    
-    await productManager.updateProduct(2, campos);
-    listado = await productManager.getProducts();
-    console.log(`Actualizado producto 2 : ${listado}`);
+
 }
 
 test();
