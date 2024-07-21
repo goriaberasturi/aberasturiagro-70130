@@ -86,7 +86,6 @@ class ProductManager {
             }
 
             await this.isfieldValid(product);
-
             await this.isCodeRegistered(product.code, products);
 
             products.push(product);
@@ -106,8 +105,12 @@ class ProductManager {
             if (product) {
                 await this.isfieldValid(fields);
 
-                if (Object.keys(fields).includes('code')) {
-                    await this.isCodeRegistered(fields.code, products);
+                if ('code' in fields) {
+                    if(product.code === fields.code) {
+                        console.log('This product code is already up to date');
+                    } else {
+                        await this.isCodeRegistered(fields.code, products);
+                    }
                 }
 
                 const updatedProduct = { ...product, ...fields, id };
@@ -156,9 +159,13 @@ const prodPrueba = {
 }
 
 const campos = {
-    title: 'Impresora Epson FX-390 II',
-    description: 'Impresora de matriz de puntos Epson FX-390 II',
-    price: 470000
+    stock: 25
 }
 
-export default ProductManager;
+const test = async () => {
+    await productManager.updateProduct(11, campos);
+}
+
+await test();
+
+// export default ProductManager;
