@@ -1,18 +1,10 @@
 import fs from 'fs';
 
+const ruta = './data/prueba.json'
+
 class ProductManager {
-    #id = 0;
-
-    constructor(path) {
-        this.initializeId();
-        this.path = path;
-    }
-
-    async initializeId() {
-        const products = await this.getProducts();
-        if (products.length > 0) {
-            this.#id = Math.max(...products.map(prod => prod.id));
-        }
+    constructor() {
+        this.path = './data/products.json';
     }
 
     async getProducts() {
@@ -68,31 +60,25 @@ class ProductManager {
         }
     }
 
-    async addProducts(prod) {
+    async addProducts(product) {
         try {
-
-            await this.initializeId();
-
             const products = await this.getProducts();
 
-            const product = {
-                title: prod.title,
-                description: prod.description,
-                price: prod.price,
-                thumbnail: prod.thumbnail,
-                code: prod.code,
-                stock: prod.stock,
-                id: this.#id + 1,
+            if(products.length === 0) {
+                product.id = 1;
+            } else {
+                product.id = Math.max(...products.map(prod => prod.id)) + 1;
             }
+
 
             await this.isfieldValid(product);
             await this.isCodeRegistered(product.code, products);
 
             products.push(product);
 
-            this.#id++;
-
             await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2), 'utf-8');
+            return product;
+
         } catch (error) {
             console.log(error);
         }
@@ -117,8 +103,11 @@ class ProductManager {
 
                 const index = products.findIndex(prod => prod.id === updatedProduct.id);
                 products[index] = updatedProduct;
+                console.log(products);
 
                 await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2), 'utf-8');
+                return updatedProduct;
+
             } else {
                 throw new Error('Product not found');
             }
@@ -147,25 +136,23 @@ class ProductManager {
     }
 }
 
-const productManager = new ProductManager('./products.json');
+// const prod = {
+//     "title": "asdas",
+//     "description": "asdasd",
+//     "price": 19,
+//     "thumbnail": "Sin imagen",
+//     "code": "aasd2",
+//     "stock": 25
+// }
 
-const prodPrueba = {
-    title: 'producto prueba',
-    description: 'Este es un producto prueba',
-    price: 200,
-    thumbnail: 'Sin imagen',
-    code: 'abc123',
-    stock: 25
-}
+// const pM = new ProductManager;
 
-const campos = {
-    stock: 25
-}
+// async function test() {
+//     console.log(await pM.getProducts());
+//     await pM.addProducts(prod);
+//     console.log(await pM.getProducts());
+// }
 
-const test = async () => {
-    await productManager.updateProduct(11, campos);
-}
+// await test();
 
-await test();
-
-// export default ProductManager;
+export default ProductManager;
