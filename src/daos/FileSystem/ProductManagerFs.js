@@ -70,7 +70,6 @@ class ProductManager {
                 product.id = Math.max(...products.map(prod => prod.id)) + 1;
             }
 
-
             await this.isfieldValid(product);
             await this.isCodeRegistered(product.code, products);
 
@@ -87,10 +86,11 @@ class ProductManager {
     async updateProduct(id, fields) {
         try {
             const [product, products] = await this.getProductById(id);
-
+            const numId = Number(id);
+            
             if (product) {
                 await this.isfieldValid(fields);
-
+                
                 if ('code' in fields) {
                     if(product.code === fields.code) {
                         console.log('This product code is already up to date');
@@ -98,12 +98,12 @@ class ProductManager {
                         await this.isCodeRegistered(fields.code, products);
                     }
                 }
+                
+                const updatedProduct = { ...product, ...fields, id:numId };
+                console.log('aca', updatedProduct, product);
 
-                const updatedProduct = { ...product, ...fields, id };
-
-                const index = products.findIndex(prod => prod.id === updatedProduct.id);
+                const index = products.findIndex(prod => prod.id == updatedProduct.id);
                 products[index] = updatedProduct;
-                console.log(products);
 
                 await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2), 'utf-8');
                 return updatedProduct;
@@ -120,14 +120,17 @@ class ProductManager {
     async deleteProduct(id) {
         try {
             const products = await this.getProducts();
-            const index = products.findIndex(prod => prod.id === id);
-
+            const index = products.findIndex(prod => prod.id == id);
+            
             if (index == -1) {
-                throw new Error('Product ID was not found')
+                throw new Error('Product ID was not found');
             } else {
+                const deletedProduct = products[index];
+
                 products.splice(index, 1);
 
                 await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2), 'utf-8');
+                return deletedProduct;
             };
 
         } catch (error) {
