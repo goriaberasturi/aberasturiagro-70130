@@ -1,6 +1,6 @@
 import fs from 'fs';
-
-const ruta = './data/prueba.json'
+const ruta = './data/products.json';
+const rutaTest = './Proyecto Final/data/products.json';
 
 class ProductManager {
     constructor() {
@@ -151,9 +151,7 @@ class ProductManager {
 // const pM = new ProductManager;
 
 // async function test() {
-//     console.log(await pM.getProducts());
-//     await pM.addProducts(prod);
-//     console.log(await pM.getProducts());
+//     console.log(await pM.getProductById(4));
 // }
 
 // await test();

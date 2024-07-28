@@ -1,4 +1,4 @@
-import {Router} from 'express';
+import { Router } from 'express';
 import ProductManager from '../daos/FileSystem/ProductManagerFs.js';
 import { rootDir } from '../utils/rootDir.js';
 
@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
     
         const productsFlt = productsDb.splice(0, limit);
 
-        res.send({status: 'success' ,data: productsFlt});
+        return res.send({status: 'success' ,data: productsFlt});
 
     } catch (error) {
         console.log(error);
@@ -28,7 +28,6 @@ router.get('/', async (req, res) => {
 router.get('/:pid', async (req, res) => {
     try {
         const productId = req.params.pid;
-        console.log('params', req.params.pid);
         const productsDb = await productManager.getProducts();
         
         if(isNaN(productId)) return res.send(productsDb);
