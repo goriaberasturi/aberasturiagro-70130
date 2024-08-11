@@ -1,0 +1,14 @@
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 5%;
+    background-color: green;
+
+    a {
+        text-decoration: none;
+        color: white;
+        font-size: 1.2em;
+        font-weight: 700;
+    }
+}

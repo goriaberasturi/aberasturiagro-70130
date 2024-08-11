@@ -4,8 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node src/app.js",
-    "dev": "node --watch src/app.js"
+    "start": "nodemon src/app.js",
+    "server": "node --watch src/app.js",
+    "sass": "sass --watch public/assets/css/main.scss:public/assets/css/main.css",
+    "dev": "concurrently \"npm run start\" \"npm run sass\""
   },
   "type": "module",
   "keywords": [],
@@ -17,5 +19,9 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "sass": "^1.77.8"
   }
 }

@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+html, body {
+  height: 100%;
+  font-size: 100%;
+  font-family: sans-serif;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 5%;
+  background-color: green;
+}
+nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+form {
+  display: grid;
+  background-color: #eeeeee;
+  grid-template-rows: repeat(4, auto);
+  grid-template-columns: repeat(6, auto);
+  justify-items: center;
+}
+form .formElement {
+  padding: 5px 10px;
+  margin: 5px;
+  width: 100%;
+}
+form .formElement .input-group input {
+  width: 100%;
+  padding: 0;
+  height: 25px;
+  margin-top: 5px;
+  border: 1px solid #b5b5b5;
+}
+form #fe1 {
+  grid-area: 1/1/2/span 2;
+}
+form #fe2 {
+  grid-area: 3/1/5/span 3;
+}
+form #fe2 textarea {
+  width: 100%;
+  padding: 0;
+  height: 7em;
+  margin-top: 5px;
+  border: 1px solid #b5b5b5;
+  resize: none;
+  font-family: sans-serif;
+}
+form #fe3 {
+  grid-area: 1/3/2/span 2;
+}
+form #fe4 {
+  grid-area: 1/5/2/span 2;
+}
+form #fe5 {
+  grid-area: 2/1/3/span 2;
+}
+form #fe6 {
+  grid-area: 2/3/3/span 2;
+}
+form #fe7 {
+  grid-area: 3/4/span 2/5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+form #fe7 .form-check {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  gap: 0.7em;
+}
+form #fe7 .form-check input:hover {
+  cursor: pointer;
+}
+form #fe7 .form-check label:hover {
+  cursor: pointer;
+}
+form #fe7 .form-check:hover {
+  cursor: pointer;
+}
+form #fe8 {
+  grid-area: 3/5/span 2/span 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+form #fe8 button {
+  width: 70%;
+  padding: 5px 0;
+  height: fit-content;
+  border: none;
+  border-radius: 3px;
+  background-color: green;
+  color: white;
+  font-size: 1.1em;
+}
+form #fe8 button:hover {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=main.css.map */
