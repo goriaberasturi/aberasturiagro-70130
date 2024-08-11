@@ -13,12 +13,12 @@ router.get('/', async (req, res) => {
         const limit = req.query.limit;
         const productsDb = await productManager.getProducts();
 
-        if(!limit) return res.send(productsDb);
-        if(isNaN(limit)) return res.send(productsDb);
+        if(!limit) return res.send({status:'succes', data: productsDb});
+        if(isNaN(limit)) return res.send({status:'succes', data: productsDb});
     
         const productsFlt = productsDb.splice(0, limit);
 
-        return res.send({status: 'success' ,data: productsFlt});
+        return res.render('index', {products: productsFlt});
 
     } catch (error) {
         console.log(error);
@@ -34,7 +34,7 @@ router.get('/:pid', async (req, res) => {
         
         const [product] = await productManager.getProductById(productId);
         
-        res.send({status: 'success' ,data: product});
+        res.send({status: 'success', data: product});
 
     } catch (error) {
         console.log(error);
