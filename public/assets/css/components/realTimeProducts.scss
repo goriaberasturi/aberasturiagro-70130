@@ -1,108 +1,137 @@
-form {
-    display: grid;
-    background-color: #eeeeee;
-    grid-template-rows: repeat(4, auto);
-    grid-template-columns: repeat(6, auto);
-    justify-items: center;
+#realTimeProducts {
+    height: 100%;
 
-    .formElement {
-        padding: 5px 10px;
-        margin: 5px;
-        width: 100%;
+    h1 {
+        margin: 1em 0;
+        text-align: center;
+        font-weight: 400;
+    }
 
-        .input-group {
-            input {
+    article {
+        height: fit-content;
+        overflow: visible;
+    }
+
+    form {
+        display: grid;
+        margin: 0 2em 2em 2em;
+        background-color: #fffed3;
+        border-radius: 5px;
+        grid-template-rows: repeat(4, auto);
+        grid-template-columns: repeat(6, auto);
+        justify-items: center;
+
+        .formElement {
+            padding: 5px 10px;
+            margin: 5px;
+            width: 100%;
+
+            .input-group {
+                input {
+                    width: 100%;
+                    padding: 0;
+                    height: 25px;
+                    margin-top: 5px;
+                    border: 1px solid #b5b5b5;
+                }
+                
+                input[type="number"]::-webkit-inner-spin-button,
+                input[type="number"]::-webkit-outer-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+            }
+        }
+
+        #fe1 {
+            grid-area: 1 / 1 / 2 / span 2;
+        }
+
+        #fe2 {
+            grid-area: 3 / 1 / 5 / span 3;
+
+            textarea {
                 width: 100%;
                 padding: 0;
-                height: 25px;
+                height: 7em;
                 margin-top: 5px;
                 border: 1px solid #b5b5b5;
+                resize: none;
+                font-family: sans-serif;
             }
         }
-    }
 
-    #fe1 {
-        grid-area: 1 / 1 / 2 / span 2;
-    }
-
-    #fe2 {
-        grid-area: 3 / 1 / 5 / span 3;
-
-        textarea {
-            width: 100%;
-            padding: 0;
-            height: 7em;
-            margin-top: 5px;
-            border: 1px solid #b5b5b5;
-            resize: none;
-            font-family: sans-serif;
+        #fe3 {
+            grid-area: 1 / 3 / 2 / span 2;
         }
-    }
 
-    #fe3 {
-        grid-area: 1 / 3 / 2 / span 2;
-    }
+        #fe4 {
+            grid-area: 1 / 5 / 2 / span 2;
+        }
 
-    #fe4 {
-        grid-area: 1 / 5 / 2 / span 2;
-    }
+        #fe5 {
+            grid-area: 2 / 1 / 3 / span 2;
+        }
 
-    #fe5 {
-        grid-area: 2 / 1 / 3 / span 2;
-    }
+        #fe6 {
+            grid-area: 2 / 3 / 3 / span 2;
+        }
 
-    #fe6 {
-        grid-area: 2 / 3 / 3 / span 2;
-    }
-
-    #fe7 {
-        grid-area: 3 / 4 / span 2 / 5;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
-        .form-check {
-            width: fit-content;
+        #fe7 {
+            grid-area: 3 / 4 / span 2 / 5;
             display: flex;
             justify-content: center;
-            gap: .7em;
+            align-items: center;
 
-            input {
+            .form-check {
+                width: fit-content;
+                display: flex;
+                justify-content: center;
+                gap: .7em;
+
+                input {
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+
+                label {
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+
                 &:hover {
                     cursor: pointer;
                 }
-            }
-            
-            label {
-                &:hover {
-                    cursor: pointer;
-                }
-            }
-
-            &:hover {
-                cursor: pointer;
             }
         }
-    }
-    
-    #fe8 {
-        grid-area: 3 / 5 / span 2 / span 2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
 
-        button {
-            width: 70%;
-            padding: 5px 0;
-            height: fit-content;
-            border: none;
-            border-radius: 3px;
-            background-color: green;
-            color: white;
-            font-size: 1.1em;
+        #fe8 {
+            grid-area: 3 / 5 / span 2 / span 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-            &:hover {
-                cursor: pointer;
+            button {
+                width: 70%;
+                padding: 5px 0;
+                height: fit-content;
+                border: none;
+                border-radius: 3px;
+                background-color: #7da86b;
+                color: white;
+                font-family: "Poppins", sans-serif;
+                font-size: 1.1em;
+                transition: background-color 0.05s ease-in-out;
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &:active {
+                    background-color: #5a8049;
+                }
             }
         }
     }

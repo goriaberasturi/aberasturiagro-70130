@@ -5,16 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/assets/css/main.css">
-    <link rel="stylesheet" href="/static/assets/css/main.css}">
     <title>Document</title>
 </head>
 
 <body>
     {{#if isMenu}}
     <nav>
-        <a href="/">Home</a>
-        <a href="/products">Productos</a>
-        <a href="/realTimeProducts">En tiempo real</a>
+        <div class="nav-logo">
+            Aberasturi Agro
+        </div>
+        <div class="nav-links">
+            <a class="nav-link{{homeLink}}" href="/products">Home</a>
+            <a class="nav-link{{prodLink}}" href="/products">Productos</a>
+            <a class="nav-link{{rtpLink}}" href="/realTimeProducts">En tiempo real</a>
+        </div>
     </nav>
     {{/if}}
     {{{body}}}

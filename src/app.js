@@ -51,6 +51,7 @@ app.use((error, req, res, next) => {
 // Config. de websocket
 const httpServer = app.listen(PORT, () => {
     console.log(`Servidor en puerto ${PORT}`);
+    console.log(`http://localhost:${PORT}/realTimeProducts`);
 });
 
 const io = new Server(httpServer);

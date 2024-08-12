@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -8,49 +9,108 @@
 html, body {
   height: 100%;
   font-size: 100%;
-  font-family: sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  overflow: scroll;
+  height: fit-content;
 }
 
 nav {
   display: flex;
-  justify-content: space-around;
+  position: sticky;
+  top: 0;
+  padding: 0 4em;
+  justify-content: space-between;
   align-items: center;
-  height: 5%;
-  background-color: green;
+  height: 3em;
+  background-color: #7da86b;
 }
-nav a {
+nav .nav-logo {
+  color: white;
+  font-size: 1.5em;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+}
+nav .nav-links {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav .nav-links a {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 2em;
+  margin: 0 0.5px;
   text-decoration: none;
   color: white;
-  font-size: 1.2em;
-  font-weight: 700;
+  font-size: 1.1em;
+  font-weight: 300;
+  border-radius: 5px 5px 0 0;
+  transition: color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+}
+nav .nav-links a:hover {
+  color: black;
+  background-color: white;
+  border-bottom: 0.5px solid #7da86b;
+}
+nav .nav-links .active {
+  background-color: white;
+  color: black;
+}
+nav .nav-links .active:hover {
+  border-bottom: none;
 }
 
-form {
+#realTimeProducts {
+  height: 100%;
+}
+#realTimeProducts h1 {
+  margin: 1em 0;
+  text-align: center;
+  font-weight: 400;
+}
+#realTimeProducts article {
+  height: fit-content;
+  overflow: visible;
+}
+#realTimeProducts form {
   display: grid;
-  background-color: #eeeeee;
+  margin: 0 2em 2em 2em;
+  background-color: #fffed3;
+  border-radius: 5px;
   grid-template-rows: repeat(4, auto);
   grid-template-columns: repeat(6, auto);
   justify-items: center;
 }
-form .formElement {
+#realTimeProducts form .formElement {
   padding: 5px 10px;
   margin: 5px;
   width: 100%;
 }
-form .formElement .input-group input {
+#realTimeProducts form .formElement .input-group input {
   width: 100%;
   padding: 0;
   height: 25px;
   margin-top: 5px;
   border: 1px solid #b5b5b5;
 }
-form #fe1 {
+#realTimeProducts form .formElement .input-group input[type=number]::-webkit-inner-spin-button,
+#realTimeProducts form .formElement .input-group input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#realTimeProducts form #fe1 {
   grid-area: 1/1/2/span 2;
 }
-form #fe2 {
+#realTimeProducts form #fe2 {
   grid-area: 3/1/5/span 3;
 }
-form #fe2 textarea {
+#realTimeProducts form #fe2 textarea {
   width: 100%;
   padding: 0;
   height: 7em;
@@ -59,57 +119,62 @@ form #fe2 textarea {
   resize: none;
   font-family: sans-serif;
 }
-form #fe3 {
+#realTimeProducts form #fe3 {
   grid-area: 1/3/2/span 2;
 }
-form #fe4 {
+#realTimeProducts form #fe4 {
   grid-area: 1/5/2/span 2;
 }
-form #fe5 {
+#realTimeProducts form #fe5 {
   grid-area: 2/1/3/span 2;
 }
-form #fe6 {
+#realTimeProducts form #fe6 {
   grid-area: 2/3/3/span 2;
 }
-form #fe7 {
+#realTimeProducts form #fe7 {
   grid-area: 3/4/span 2/5;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-form #fe7 .form-check {
+#realTimeProducts form #fe7 .form-check {
   width: fit-content;
   display: flex;
   justify-content: center;
   gap: 0.7em;
 }
-form #fe7 .form-check input:hover {
+#realTimeProducts form #fe7 .form-check input:hover {
   cursor: pointer;
 }
-form #fe7 .form-check label:hover {
+#realTimeProducts form #fe7 .form-check label:hover {
   cursor: pointer;
 }
-form #fe7 .form-check:hover {
+#realTimeProducts form #fe7 .form-check:hover {
   cursor: pointer;
 }
-form #fe8 {
+#realTimeProducts form #fe8 {
   grid-area: 3/5/span 2/span 2;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-form #fe8 button {
+#realTimeProducts form #fe8 button {
   width: 70%;
   padding: 5px 0;
   height: fit-content;
   border: none;
   border-radius: 3px;
-  background-color: green;
+  background-color: #7da86b;
   color: white;
+  font-family: "Poppins", sans-serif;
   font-size: 1.1em;
+  transition: background-color 0.05s ease-in-out;
 }
-form #fe8 button:hover {
+#realTimeProducts form #fe8 button:hover {
   cursor: pointer;
+}
+#realTimeProducts form #fe8 button:active {
+  background-color: #5a8049;
 }
 
 /*# sourceMappingURL=main.css.map */
