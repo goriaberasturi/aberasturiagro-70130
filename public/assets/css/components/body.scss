@@ -7,6 +7,7 @@ nav {
     align-items: center;
     height: 3em;
     background-color: #7da86b;
+    z-index: 1;
 
     .nav-logo {
         color: white;
@@ -35,21 +36,23 @@ nav {
             border-radius: 5px 5px 0 0;
             transition: color .2s ease-in-out;
             transition: background-color .2s ease-in-out;
+            transition: border-bottom .1s ease-out;
 
             
             &:hover {
                 color: black;
                 background-color: white;
-                border-bottom: .5px solid #7da86b;
+                border-bottom: 3px solid #7da86b;
             }
         }
         
         .active {
             background-color: white;
             color: black;
+            border-left: 2px solid #8a8a8a;
+            border-right: 2px solid #8a8a8a;
 
             &:hover {
-
                 border-bottom: none;
             }
         }

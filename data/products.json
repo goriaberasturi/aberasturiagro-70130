@@ -1,9 +1,11 @@
 [
   {
     "title": "Fertilizante Liquido Mist-N",
-    "description": "Nitrógeno: 14.5% Calcio: 6.5% Magnesio: 1.5% Azufre: 2.5%",
-    "price": 19,
-    "thumbnails": [],
+    "description": "Fertilizante Liquido Mist-N",
+    "price": null,
+    "thumbnails": [
+      "https://argentina.agrofystatic.com/media/catalog/product/cache/850x600/f/e/fertilizante-liquido-mist-n-GREGORIO-ABERASTURI-AGRO-agrofy-0-20240118181118.png"
+    ],
     "code": "aaa001",
     "status": true,
     "category": "fertilizantes",
@@ -36,7 +38,9 @@
     "title": "Silo Bolsa Ipesasilo 9 X 60 Mts",
     "description": "Las bolsas IpesaSilo se fabrican bajo normas de calidad ISO 9001/2000, asegurando además el cuidado del medio ambiente a través de la certificación ISO 140001/2004.",
     "price": 454,
-    "thumbnails": [],
+    "thumbnails": [
+      "https://argentina.agrofystatic.com/media/catalog/product/cache/850x600/f/e/fertilizante-liquido-mist-n-GREGORIO-ABERASTURI-AGRO-agrofy-0-20240118181118.png"
+    ],
     "code": "aaa004",
     "status": true,
     "category": "almacenamiento",
@@ -119,5 +123,16 @@
     "category": "tratamiento-de-semillas",
     "stock": 25,
     "id": 11
+  },
+  {
+    "title": "asdasdasd",
+    "description": "asdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\nASdasdasd",
+    "price": "123",
+    "thumbnails": [],
+    "code": "asdasdasd",
+    "category": "fertilizantes",
+    "stock": "123",
+    "status": true,
+    "id": 12
   }
 ]

@@ -7,13 +7,16 @@ function updateProductList(lista) {
 
     lista.forEach( prod => {
         productosHTML += `<div class="productCard">
+        <div class="imgContainer">
+            <img src="${prod.thumbnails[0] || ''}" alt="Product Image">
+        </div>
         <h2>${prod.title}</h2>
             <ul>
-                <li>description: ${prod.description}</li>
-                <li>price: ${prod.price}</li>
-                <li>code: ${prod.code}</li>
-                <li>category: ${prod.category}</li>
-                <li>stock: ${prod.stock}</li>
+                <li><span>description:</span> ${prod.description}</li>
+                <li><span>price:</span> ${prod.price}</li>
+                <li><span>code:</span> ${prod.code}</li>
+                <li><span>category:</span> ${prod.category}</li>
+                <li><span>stock:</span> ${prod.stock}</li>
                 </ul>
             <button id onclick="deleteProduct(${prod.id})">Eliminar</button>
         </div>`
@@ -33,6 +36,7 @@ form.addEventListener('submit', (evt) => {
     let title = form.elements.title.value;
     let description = form.elements.description.value;
     let price = form.elements.price.value;
+    let thumbnails = [];
     let code = form.elements.code.value;
     let category = form.elements.category.value;
     let stock = form.elements.stock.value;
@@ -42,6 +46,7 @@ form.addEventListener('submit', (evt) => {
         title,
         description,
         price,
+        thumbnails,
         code,
         category,
         stock,
