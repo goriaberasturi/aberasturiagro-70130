@@ -1,17 +1,20 @@
-<section>
+<section id="products">
     <h1>Listado de Productos</h1>
-    <article>
+    <article class="prodList">
         {{#each products}}
-        <h1>{{title}}</h1>
-        <ul>
-            <li>description: {{description}}</li>
-            <li>price: {{price}}</li>
-            <li>code: {{code}}</li>
-            <li>category: {{category}}</li>
-            <li>stock: {{stock}}</li>
-        </ul>
+        <div class="productCard">
+            <div class="imgContainer">
+                <img src="{{thumbnails.[0]}}" alt="{{title}}">
+            </div>
+            <h2>{{title}}</h2>
+            <ul>
+                <li><span>description:</span> {{description}}</li>
+                <li><span>price:</span> {{price}}</li>
+                <li><span>code:</span> {{code}}</li>
+                <li><span>category:</span> {{category}}</li>
+                <li><span>stock:</span> {{stock}}</li>
+            </ul>
+        </div>
         {{/each}}
     </article>
 </section>
-{{!-- <script src="/socket.io/socket.io.js"></script>
-<script src="/static/assets/js/index.js"></script> --}}

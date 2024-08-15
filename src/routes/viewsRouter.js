@@ -17,8 +17,7 @@ router.get('/realTimeProducts', async (req, res) => {
     res.render('realTimeProducts', {
         isMenu: true,
         rtpLink: ' active',
-        products: await pM.getProducts(),
-        style: 'components/realTimeProducts.css'
+        products: await pM.getProducts()
     });
 });
 

@@ -1,4 +1,4 @@
-#realTimeProducts {
+#realTimeProducts, #products {
     height: 100%;
     background-color: white;
     
@@ -181,7 +181,7 @@
         }
     }
 
-    #prodList {
+    .prodList {
         height: fit-content;
         overflow: visible;
         display: grid;

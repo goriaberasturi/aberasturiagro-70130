@@ -1,14 +1,14 @@
 const socketClient = io();
 
 function updateProductList(lista) {
-    const prodList = document.querySelector('#prodList');
+    const prodList = document.querySelector('.prodList');
 
     let productosHTML = '';
 
     lista.forEach( prod => {
         productosHTML += `<div class="productCard">
         <div class="imgContainer">
-            <img src="${prod.thumbnails[0] || ''}" alt="Product Image">
+            <img src="${prod.thumbnails[0] || ''}" alt="${prod.title}">
         </div>
         <h2>${prod.title}</h2>
             <ul>
@@ -55,13 +55,6 @@ form.addEventListener('submit', (evt) => {
 
     form.reset();
 });
-
-let idInput = document.querySelector('#id-prod');
-let deleteBtn = document.querySelector('#delete-btn');
-// deleteBtn.onclick = () => {
-//     socketClient.emit('deleteProduct', idInput.value);
-//     idInput.value = '';
-// };
 
 socketClient.on('productLoad', listaProd => {
     updateProductList(listaProd);
