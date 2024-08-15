@@ -5,8 +5,16 @@ import ProductManager from "../daos/FileSystem/ProductManagerFs.js";
 const router = Router();
 const pM = new ProductManager();
 
+router.get('/', async (req, res) => {
+    res.render('home', {
+        isMenu: true,
+        prodLink: ' active',
+        products: await pM.getProducts()
+    });
+});
+
 router.get('/products', async (req, res) => {
-    res.render('index', {
+    res.render('home', {
         isMenu: true,
         prodLink: ' active',
         products: await pM.getProducts()
