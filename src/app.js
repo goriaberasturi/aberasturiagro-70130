@@ -17,6 +17,22 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 
+// Config. de websocket
+const httpServer = app.listen(PORT, () => {
+    console.log(`Servidor en puerto ${PORT}`);
+    console.log(`http://localhost:${PORT}/realTimeProducts`);
+});
+
+const io = new Server(httpServer);
+
+// Middleware para uso del socket en toda la app
+const ioMiddleware = (io) => (req, res, next) => {
+    req.io = io;
+    next();
+}
+app.use(ioMiddleware(io));
+
+
 // Parsear JSON y data URL-encoded
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -47,12 +63,4 @@ app.use((error, req, res, next) => {
     res.status(500).send('Error de server');
 });
 
-
-// Config. de websocket
-const httpServer = app.listen(PORT, () => {
-    console.log(`Servidor en puerto ${PORT}`);
-    console.log(`http://localhost:${PORT}/realTimeProducts`);
-});
-
-const io = new Server(httpServer);
 socketProducts(io);

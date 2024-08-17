@@ -1,11 +1,12 @@
 import { Router } from "express";
 
 import ProductManager from "../daos/FileSystem/ProductManagerFs.js";
+import socketProducts from "../listeners/socketProducts.js";
 
 const router = Router();
 const pM = new ProductManager();
 
-// Ruta home
+// Rutas home
 router.get('/', async (req, res) => {
     res.render('home', {
         isMenu: true,
@@ -14,7 +15,7 @@ router.get('/', async (req, res) => {
     });
 });
 
-// Ruta products
+// Rutas products
 router.get('/products', async (req, res) => {
     res.render('home', {
         isMenu: true,
@@ -23,8 +24,9 @@ router.get('/products', async (req, res) => {
     });
 });
 
-// Ruta real time products
+// Rutas real time products
 router.get('/realTimeProducts', async (req, res) => {
+
     res.render('realTimeProducts', {
         isMenu: true,
         rtpLink: ' active',
