@@ -1,11 +1,12 @@
 const socketClient = io();
 
+// Actualiza el componente que lista los productos
 function updateProductList(lista) {
     const prodList = document.querySelector('.prodList');
 
     let productosHTML = '';
 
-    lista.forEach( prod => {
+    lista.forEach(prod => {
         productosHTML += `<div class="productCard">
         <div class="imgContainer">
             <img src="${prod.thumbnails[0] || ''}" alt="${prod.title}">
@@ -18,16 +19,25 @@ function updateProductList(lista) {
                 <li><span>category:</span> ${prod.category}</li>
                 <li><span>stock:</span> ${prod.stock}</li>
                 </ul>
-            <button id onclick="deleteProduct(${prod.id})">Eliminar</button>
-        </div>`
+            <button id="${prod.id}" class="deleteBtn">Eliminar</button>
+        </div>`;
     });
 
     prodList.innerHTML = productosHTML;
+    
+    const deleteBtns = document.querySelectorAll('.deleteBtn');    
+    deleteBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            deleteProduct(btn.getAttribute('id'));
+        });
+    });
 }
 
+// Funcion para eliminar un producot con socket
 function deleteProduct(id) {
     socketClient.emit('deleteProduct', id);
 }
+
 
 let form = document.querySelector("#formProduct");
 form.addEventListener('submit', (evt) => {
@@ -36,7 +46,7 @@ form.addEventListener('submit', (evt) => {
     let title = form.elements.title.value;
     let description = form.elements.description.value;
     let price = form.elements.price.value;
-    let thumbnails = [];
+    let thumbnails = [form.elements.imgUrl.value];
     let code = form.elements.code.value;
     let category = form.elements.category.value;
     let stock = form.elements.stock.value;
@@ -56,6 +66,7 @@ form.addEventListener('submit', (evt) => {
     form.reset();
 });
 
+// Ejecuta la carga de productos en la lista
 socketClient.on('productLoad', listaProd => {
     updateProductList(listaProd);
 });

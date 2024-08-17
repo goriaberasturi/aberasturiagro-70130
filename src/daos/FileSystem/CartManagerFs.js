@@ -8,6 +8,7 @@ class CartManager {
         this.path = ruta;
     }
 
+    // Devuelve un array que contiene todos los carts. Si no existe el archivo retorna un array vacio
     async getCarts() {
         try {
             const result = await fs.promises.readFile(this.path, 'utf-8');
@@ -18,6 +19,7 @@ class CartManager {
         }
     }
 
+    // Devuelve el cart cuyo id se paso por parametro y el array de carts. Si no lo encuentra devuelve un error
     async getCartById(id) {
         try {
             const carts = await this.getCarts();
@@ -34,6 +36,7 @@ class CartManager {
         }
     }
 
+    // Agrega al array de carts el cart pasado por parametro y lo retorna
     async addCarts(cart) {
         try {
             const carts = await this.getCarts();
@@ -57,6 +60,7 @@ class CartManager {
         }
     }
 
+    // Valida si el id del productro pasado por parametro esta en el cart cuyo id se paso por parametro. Devuelve true si los esta, y false si no
     async isProductOnCart(cid, pid) {
         const [cart] = await this.getCartById(cid);
         const cartPids = [];
@@ -74,6 +78,7 @@ class CartManager {
         }
     }
 
+    // Agrega al carrito cuyo id se paso por parametro, el id y la cantidad del producto pasados por parametro. Retorna el producto agregado
     async addProdToCart(cid, pid, quantity) {
         try {
             const [cart, carts] = await this.getCartById(cid);

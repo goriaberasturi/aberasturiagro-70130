@@ -7,6 +7,7 @@ class ProductManager {
         this.path = './data/products.json';
     }
 
+    // Devuelve todos los productos
     async getProducts() {
         try {
             const result = await fs.promises.readFile(this.path, 'utf-8');
@@ -17,6 +18,7 @@ class ProductManager {
         }
     }
 
+    // Devuelve el un array que en el index 0 contiene el producto con el id pasado por parametro, y en el index 1 la lista de productos
     async getProductById(id) {
         try {
             const products = await this.getProducts();
@@ -33,6 +35,7 @@ class ProductManager {
         }
     }
 
+    // Arroja un error si uno de los productos pasados por parametro tiene el codigo pasado por parametro. Sino, arroja false
     async isCodeRegistered(code, products) {
         const product = products.find(product => product.code == code);
 
@@ -43,6 +46,7 @@ class ProductManager {
         }
     }
 
+    // Valida si se completaron todos los campo. Devuelve true si estan completos y arroja un error si alguno de los campos no lo esta
     async isfieldValid(product) {
         let isValid = true;
         let fields = Object.values(product);
@@ -60,6 +64,7 @@ class ProductManager {
         }
     }
 
+    // Agrega el producto pasado por parametro en formato de objeto
     async addProducts(product) {
         try {
             const products = await this.getProducts();
@@ -83,6 +88,7 @@ class ProductManager {
         }
     }
 
+    // Actualiza los campos pasados por parametro del producto cuyo id se paso por parametro
     async updateProduct(id, fields) {
         try {
             const [product, products] = await this.getProductById(id);
@@ -117,6 +123,7 @@ class ProductManager {
         }
     }
 
+    // Elimina el producto cuyo id se paso por parametro
     async deleteProduct(id) {
         try {
             const products = await this.getProducts();

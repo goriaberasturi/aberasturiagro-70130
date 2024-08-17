@@ -125,38 +125,41 @@ nav .nav-links .active:hover {
   -webkit-appearance: none;
   margin: 0;
 }
-#realTimeProducts form #fe1, #products form #fe1 {
+#realTimeProducts form #fe-title, #products form #fe-title {
   grid-area: 1/1/2/span 2;
 }
-#realTimeProducts form #fe2, #products form #fe2 {
+#realTimeProducts form #fe-description, #products form #fe-description {
   grid-area: 3/1/5/span 3;
 }
-#realTimeProducts form #fe3, #products form #fe3 {
+#realTimeProducts form #fe-price, #products form #fe-price {
   grid-area: 1/3/2/span 2;
 }
-#realTimeProducts form #fe4, #products form #fe4 {
+#realTimeProducts form #fe-imgUrl, #products form #fe-imgUrl {
   grid-area: 1/5/2/span 2;
 }
-#realTimeProducts form #fe5, #products form #fe5 {
+#realTimeProducts form #fe-code, #products form #fe-code {
   grid-area: 2/1/3/span 2;
 }
-#realTimeProducts form #fe6, #products form #fe6 {
+#realTimeProducts form #fe-category, #products form #fe-category {
   grid-area: 2/3/3/span 2;
 }
-#realTimeProducts form #fe7, #products form #fe7 {
+#realTimeProducts form #fe-stock, #products form #fe-stock {
+  grid-area: 2/5/3/span 2;
+}
+#realTimeProducts form #fe-status, #products form #fe-status {
   grid-area: 3/4/span 2/5;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#realTimeProducts form #fe7 .form-check, #products form #fe7 .form-check {
+#realTimeProducts form #fe-status .form-check, #products form #fe-status .form-check {
   width: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.7em;
 }
-#realTimeProducts form #fe7 .form-check input, #products form #fe7 .form-check input {
+#realTimeProducts form #fe-status .form-check input, #products form #fe-status .form-check input {
   position: relative;
   width: 50px;
   height: 25px;
@@ -167,16 +170,16 @@ nav .nav-links .active:hover {
   transition: 0.5s;
   z-index: 0;
 }
-#realTimeProducts form #fe7 .form-check input:hover, #products form #fe7 .form-check input:hover {
+#realTimeProducts form #fe-status .form-check input:hover, #products form #fe-status .form-check input:hover {
   cursor: pointer;
 }
-#realTimeProducts form #fe7 .form-check input:checked, #products form #fe7 .form-check input:checked {
+#realTimeProducts form #fe-status .form-check input:checked, #products form #fe-status .form-check input:checked {
   background: #7da86b;
 }
-#realTimeProducts form #fe7 .form-check input:checked:before, #products form #fe7 .form-check input:checked:before {
+#realTimeProducts form #fe-status .form-check input:checked:before, #products form #fe-status .form-check input:checked:before {
   left: 25px;
 }
-#realTimeProducts form #fe7 .form-check input::before, #products form #fe7 .form-check input::before {
+#realTimeProducts form #fe-status .form-check input::before, #products form #fe-status .form-check input::before {
   content: "";
   position: absolute;
   width: 25px;
@@ -189,23 +192,23 @@ nav .nav-links .active:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transition: 0.5s;
 }
-#realTimeProducts form #fe7 .form-check label, #products form #fe7 .form-check label {
+#realTimeProducts form #fe-status .form-check label, #products form #fe-status .form-check label {
   font-size: 1.2em;
   font-weight: 400;
 }
-#realTimeProducts form #fe7 .form-check label:hover, #products form #fe7 .form-check label:hover {
+#realTimeProducts form #fe-status .form-check label:hover, #products form #fe-status .form-check label:hover {
   cursor: pointer;
 }
-#realTimeProducts form #fe7 .form-check:hover, #products form #fe7 .form-check:hover {
+#realTimeProducts form #fe-status .form-check:hover, #products form #fe-status .form-check:hover {
   cursor: pointer;
 }
-#realTimeProducts form #fe8, #products form #fe8 {
+#realTimeProducts form #fe-btn, #products form #fe-btn {
   grid-area: 3/5/span 2/span 2;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#realTimeProducts form #fe8 button, #products form #fe8 button {
+#realTimeProducts form #fe-btn button, #products form #fe-btn button {
   width: 70%;
   padding: 5px 0;
   height: fit-content;
@@ -217,10 +220,10 @@ nav .nav-links .active:hover {
   font-size: 1.1em;
   transition: background-color 0.05s ease-in-out;
 }
-#realTimeProducts form #fe8 button:hover, #products form #fe8 button:hover {
+#realTimeProducts form #fe-btn button:hover, #products form #fe-btn button:hover {
   cursor: pointer;
 }
-#realTimeProducts form #fe8 button:active, #products form #fe8 button:active {
+#realTimeProducts form #fe-btn button:active, #products form #fe-btn button:active {
   background-color: #5a8049;
 }
 #realTimeProducts .prodList, #products .prodList {

@@ -5,6 +5,7 @@ import ProductManager from "../daos/FileSystem/ProductManagerFs.js";
 const router = Router();
 const pM = new ProductManager();
 
+// Ruta home
 router.get('/', async (req, res) => {
     res.render('home', {
         isMenu: true,
@@ -13,6 +14,7 @@ router.get('/', async (req, res) => {
     });
 });
 
+// Ruta products
 router.get('/products', async (req, res) => {
     res.render('home', {
         isMenu: true,
@@ -21,6 +23,7 @@ router.get('/products', async (req, res) => {
     });
 });
 
+// Ruta real time products
 router.get('/realTimeProducts', async (req, res) => {
     res.render('realTimeProducts', {
         isMenu: true,
