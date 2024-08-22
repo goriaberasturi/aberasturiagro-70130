@@ -1,7 +1,6 @@
 import { Router } from "express";
 
 import ProductManager from "../daos/FileSystem/ProductManagerFs.js";
-import socketProducts from "../listeners/socketProducts.js";
 
 const router = Router();
 const pM = new ProductManager();

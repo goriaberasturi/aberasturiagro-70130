@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import ProductManager from '../daos/FileSystem/ProductManagerFs.js';
-import { rootDir } from '../utils/rootDir.js';
+import ProductManager from '../../daos/FileSystem/ProductManagerFs.js';
+import { rootDir } from '../../utils/rootDir.js';
 
 const router = Router();
 
