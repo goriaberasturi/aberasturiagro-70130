@@ -35,10 +35,6 @@ const ProductSchema = new Schema({
     status: {
         type: Boolean,
         required: true
-    },
-    creationDate: {
-        type: Date,
-        default: Date.now()
     }
 });
 

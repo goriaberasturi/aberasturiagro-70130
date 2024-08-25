@@ -1,5 +1,5 @@
 import express from 'express';
-import Handlebars from 'express-handlebars';
+import handlebars from 'express-handlebars';
 import logger from 'morgan';
 import { rootDir } from './utils/rootDir.js';
 import path from 'path';
@@ -44,7 +44,7 @@ connectDB();
 
 
 // Configuracion del motor de plantillas
-app.engine('handlebars', Handlebars.engine());
+app.engine('handlebars', handlebars.engine());
 // Configuracion de carpeta donde debe tomar las plantillas
 app.set('views', path.join(rootDir, 'src','views'));
 // Configurar la extension de las plantillas

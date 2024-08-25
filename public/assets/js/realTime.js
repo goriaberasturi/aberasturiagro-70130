@@ -9,7 +9,7 @@ function updateProductList(lista) {
     lista.forEach(prod => {
         productosHTML += `<div class="productCard">
         <div class="imgContainer">
-            <img src="${prod.thumbnails[0] || ''}" alt="${prod.title}">
+            <img src="${prod.thumbnails || ''}" alt="${prod.title}">
         </div>
         <h2>${prod.title}</h2>
             <ul>
@@ -19,7 +19,7 @@ function updateProductList(lista) {
                 <li><span>category:</span> ${prod.category}</li>
                 <li><span>stock:</span> ${prod.stock}</li>
                 </ul>
-            <button id="${prod.id}" class="deleteBtn">Eliminar</button>
+            <button id="${prod._id.toString()}" class="deleteBtn">Eliminar</button>
         </div>`;
     });
 
