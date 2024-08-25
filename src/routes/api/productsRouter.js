@@ -1,24 +1,22 @@
 import { Router } from 'express';
-import ProductManager from '../../daos/FileSystem/ProductManagerFs.js';
-import { rootDir } from '../../utils/rootDir.js';
+import ProductsManagerMongo from '../../daos/MongoDb/products.manager.mongo.js'
 
 const router = Router();
 
 // Configuracion
 
-const productManager = new ProductManager();
+const productService = new ProductsManagerMongo();
 
 router.get('/', async (req, res) => {
     try {
         const limit = req.query.limit;
-        const productsDb = await productManager.getProducts();
+        const productsDb = await productService.getProducts();
 
-        if(!limit) return res.send({status:'succes', data: productsDb});
-        if(isNaN(limit)) return res.send({status:'succes', data: productsDb});
-    
-        const productsFlt = productsDb.splice(0, limit);
+        if(!limit) return res.status(200).send({status:'success', payload: productsDb});
+        if(isNaN(limit)) return res.status(400).send({status:'error', message: 'El limite debe ser un numero'});
 
-        return res.render('index', {products: productsFlt});
+        const productsFlt = await productService.getLimitedProducts(limit);
+        return res.status(200).send({status:'success', payload: productsFlt});
 
     } catch (error) {
         console.log(error);
@@ -27,28 +25,30 @@ router.get('/', async (req, res) => {
 
 router.get('/:pid', async (req, res) => {
     try {
-        const productId = req.params.pid;
-        const productsDb = await productManager.getProducts();
+        const {pid} = req.params;
+        if(!await productService.isValidId(pid)) return res.status(400).send({status: 'error', message: 'Id invalido'});
         
-        if(isNaN(productId)) return res.send(productsDb);
+        const product = await productService.getProduct({_id: pid});
+        if(!product) return res.status(404).send({status: 'error', message: 'No se hallo un producto con este id'});
         
-        const [product] = await productManager.getProductById(productId);
+        return res.status(200).send({status: 'success', payload: product});
         
-        res.send({status: 'success', data: product});
-
     } catch (error) {
         console.log(error);
     }
-
+    
 });
 
 router.post('/', async (req, res) => {
     try {
         const {body} = req;
-        const newProduct = await productManager.addProducts(body);
-        
-        res.send({status: 'success', data: newProduct});
+        if(!await productService.isFieldValid(body)) return res.status(400).send({status: 'error', message: 'Hay campos sin completar'});
+        if(await productService.getProduct({code: body.code})) return res.status(409).send({status: 'error', message: 'Este codigo ya se encuentra registrado'});
 
+        const response = await productService.createProduct(body);
+        
+        return res.status(200).send({status: 'success', payload: response});
+        
     } catch (error) {
         console.log(error);
     }
@@ -57,25 +57,35 @@ router.post('/', async (req, res) => {
 router.put('/:pid', async (req, res) => {
     try {
         const {body} = req;
-        const productId = req.params.pid;
-        const updatedProduct = await productManager.updateProduct(productId, body);
-
-        res.send({status: 'success', data: updatedProduct});
-
+        const {pid} = req.params;
+        if(!await productService.isValidId(pid)) return res.status(400).send({status: 'error', message: 'Id invalido'});
+        if(!await productService.isFieldValid(body)) return res.status(400).send({status: 'error', message: 'Hay campos sin completar'});
+        const foundCode = await productService.getProduct({code: body.code});
+        if(foundCode) {
+            if(foundCode._id.toString() != pid) return res.status(409).send({status: 'error', message: 'Este codigo ya se encuentra registrado'});
+        }
+        
+        const response = await productService.updateProduct(pid, body);
+        
+        return res.status(200).send({status: 'success', payload: response});
+        
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 });
 
 router.delete('/:pid', async (req, res) => {
     try {
-        const productId = req.params.pid;
-        const deletedProduct = await productManager.deleteProduct(productId);
+        const {pid} = req.params;
+        if(!await productService.isValidId(pid)) return res.status(400).send({status: 'error', message: 'Id invalido'});
+        
+        const response = await productService.deleteProduct(pid);
+        if(!response) return res.status(404).send({status: 'error', message: 'No se hallo un producto con este id'});
 
-        res.send({status: 'success', data: deletedProduct});
+        return res.status(200).send({status: 'success', payload: response});
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 });
 
