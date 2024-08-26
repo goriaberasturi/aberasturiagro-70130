@@ -1,4 +1,3 @@
-import ProductManager from "../daos/FileSystem/ProductManagerFs.js";
 import ProductsManagerMongo from "../daos/MongoDb/products.manager.mongo.js";
 // const pm = new ProductManager();
 const pS = new ProductsManagerMongo;

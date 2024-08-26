@@ -26,7 +26,6 @@ router.get('/products', async (req, res) => {
 
 // Rutas real time products
 router.get('/realTimeProducts', async (req, res) => {
-
     res.render('realTimeProducts', {
         isMenu: true,
         rtpLink: ' active',

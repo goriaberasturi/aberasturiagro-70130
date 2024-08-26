@@ -21,7 +21,6 @@ nav {
   display: flex;
   position: sticky;
   top: 0;
-  padding: 0 4em;
   justify-content: space-between;
   align-items: center;
   height: 3em;
@@ -29,18 +28,35 @@ nav {
   z-index: 1;
 }
 nav .nav-logo {
+  margin-left: 2em;
   color: white;
   font-size: 1.5em;
   font-weight: 500;
-  transition: color 0.2s ease-in-out;
 }
-nav .nav-links {
+nav .nav-elements {
+  height: 100%;
+  display: flex;
+}
+nav .nav-elements .cart-logo {
+  margin: 0 2em;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+nav .nav-elements .cart-logo img {
+  height: 70%;
+  filter: invert(1);
+}
+nav .nav-elements .cart-logo:hover {
+  transform: scale(1.1);
+}
+nav .nav-elements .nav-links {
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-nav .nav-links a {
+nav .nav-elements .nav-links a {
   height: 100%;
   display: flex;
   align-items: center;
@@ -55,18 +71,18 @@ nav .nav-links a {
   transition: background-color 0.2s ease-in-out;
   transition: border-bottom 0.1s ease-out;
 }
-nav .nav-links a:hover {
+nav .nav-elements .nav-links a:hover {
   color: black;
   background-color: white;
   border-bottom: 3px solid #7da86b;
 }
-nav .nav-links .active {
+nav .nav-elements .nav-links .active {
   background-color: white;
   color: black;
   border-left: 2px solid #8a8a8a;
   border-right: 2px solid #8a8a8a;
 }
-nav .nav-links .active:hover {
+nav .nav-elements .nav-links .active:hover {
   border-bottom: none;
 }
 
