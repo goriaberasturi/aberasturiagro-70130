@@ -1,21 +1,17 @@
 import { Router } from "express";
 import CartManager from "../../daos/FileSystem/CartManagerFs.js";
+import CartsManagerMongo from "../../daos/MongoDb/carts.manager.mongo.js";
 
 const router = Router();
 
 const cartManager = new CartManager();
+const cartService = new CartsManagerMongo();
 
 router.get('/', async (req, res) => {
     try {
-        const limit = req.query.limit;
-        const carts = await cartManager.getCarts();
+        const carts = await cartService.getCarts();
 
-        if(!limit) return res.send({status: 'success', data: carts});
-        if(isNaN(limit)) return res.send({status: 'success', data: carts});
-
-        const cartsFlt = carts.splice(0, limit);
-
-        return res.send({status: 'success', data: cartsFlt});
+        return res.send({status: 'success', payload: carts});
         
     } catch (error) {
         console.log(error);
@@ -29,33 +25,61 @@ router.get('/:cid', async (req, res) => {
         if(!cid) return res.send({status: 'success', data: carts});
         
         const [cart] = await cartManager.getCartById(cid);
-        return res.send({status: 'success', data: cart});
+        return res.send({status: 'success', payload: cart});
         
     } catch (error) {
         console.log(error);
     }
 });
 
-router.post('/', async (req, res) => {
+router.put('/:cid', async (req, res) => {
     try {
-        const {body} = req; //Array de productos contenidos en el nuevo cart
-        const newCart = await cartManager.addCarts(body);
+        const {body} = req;
+        const {cid} = req.params;
 
-        return res.send({status: 'success', data: newCart});
+        const addedProduct = await cartService.addProductToCart(cid, body);
+
+        res.send({status: 'success', payload: addedProduct});
 
     } catch (error) {
         console.log(error);
     }
 });
 
-router.post('/:cid/product/:pid', async (req, res) => {
+router.put('/:cid/products/:pid', async (req, res) => {
     try {
         const {body} = req;
         const {cid, pid} = req.params;
 
-        const addedProduct = await cartManager.addProdToCart(cid, pid, 1);
+        const addedProduct = await cartService.updateProductOnCart(cid, pid, body);
 
-        res.send({status: 'success', data: addedProduct});
+        res.send({status: 'success', payload: addedProduct});
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+router.delete('/:cid', async (req, res) => {
+    try {
+        const {cid} = req.params;
+
+        const deltedCart = await cartService.deleteAllProducts(cid);
+
+        res.send({status: 'success', payload: deltedCart});
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+router.delete('/:cid/products/:pid', async (req, res) => {
+    try {
+        const {cid, pid} = req.params;
+
+        const addedProduct = await cartService.deleteProductOnCart(cid, pid);
+
+        res.send({status: 'success', payload: addedProduct});
 
     } catch (error) {
         console.log(error);
