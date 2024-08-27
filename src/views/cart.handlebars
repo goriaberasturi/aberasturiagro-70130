@@ -1,0 +1,23 @@
+<section id="cart">
+    <h1>Carrito de compras</h1>
+    <div class="cart-container">
+        <article class="cartList">
+            {{#each products}}
+            <div class="productCard">
+                <div class="imgContainer">
+                    <img src="{{product.thumbnails}}" alt="{{product.title}}">
+                </div>
+                <div class="infoContainer">
+                    <h2>{{product.title}}</h2>
+                    <ul>
+                        <li><span>price:</span> {{product.price}}</li>
+                        <li><span>category:</span> {{product.category}}</li>
+                        <li><span>stock:</span> {{product.stock}}</li>
+                        <li><span>quantity:</span> {{quantity}}</li>
+                    </ul>
+                </div>
+            </div>
+            {{/each}}
+        </article>
+    </div>
+</section>

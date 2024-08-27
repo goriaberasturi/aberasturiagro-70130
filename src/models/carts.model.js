@@ -17,9 +17,9 @@ const CartsSchema = new Schema({
     }
 });
 
-// CartsSchema.pre('findOne', function() {
-//     this.populate('products.product');
-// });
+CartsSchema.pre('findOne', function() {
+    this.populate('products.product');
+});
 
 
 const cartModel = model(collection, CartsSchema);

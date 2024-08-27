@@ -86,16 +86,16 @@ nav .nav-elements .nav-links .active:hover {
   border-bottom: none;
 }
 
-#realTimeProducts, #products {
+#realTimeProducts, #products, #cart {
   height: 100%;
   background-color: white;
 }
-#realTimeProducts h1, #products h1 {
+#realTimeProducts h1, #products h1, #cart h1 {
   margin: 1em 0;
   text-align: center;
   font-weight: 500;
 }
-#realTimeProducts form, #products form {
+#realTimeProducts form, #products form, #cart form {
   display: grid;
   margin: 0 2em 2em 2em;
   background-color: #fffed3;
@@ -105,16 +105,16 @@ nav .nav-elements .nav-links .active:hover {
   justify-items: center;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 }
-#realTimeProducts form .formElement, #products form .formElement {
+#realTimeProducts form .formElement, #products form .formElement, #cart form .formElement {
   padding: 5px 2em;
   margin: 5px;
   width: 100%;
 }
-#realTimeProducts form .formElement .form-label, #products form .formElement .form-label {
+#realTimeProducts form .formElement .form-label, #products form .formElement .form-label, #cart form .formElement .form-label {
   font-size: 1.2em;
   font-weight: 400;
 }
-#realTimeProducts form .formElement .input-group input, #realTimeProducts form .formElement .input-group textarea, #products form .formElement .input-group input, #products form .formElement .input-group textarea {
+#realTimeProducts form .formElement .input-group input, #realTimeProducts form .formElement .input-group textarea, #products form .formElement .input-group input, #products form .formElement .input-group textarea, #cart form .formElement .input-group input, #cart form .formElement .input-group textarea {
   width: 100%;
   padding-left: 12px;
   height: 2.5em;
@@ -126,10 +126,10 @@ nav .nav-elements .nav-links .active:hover {
   font-size: 16px;
   transition: all 0.3s ease;
 }
-#realTimeProducts form .formElement .input-group input:focus, #realTimeProducts form .formElement .input-group input:valid, #realTimeProducts form .formElement .input-group textarea:focus, #realTimeProducts form .formElement .input-group textarea:valid, #products form .formElement .input-group input:focus, #products form .formElement .input-group input:valid, #products form .formElement .input-group textarea:focus, #products form .formElement .input-group textarea:valid {
+#realTimeProducts form .formElement .input-group input:focus, #realTimeProducts form .formElement .input-group input:valid, #realTimeProducts form .formElement .input-group textarea:focus, #realTimeProducts form .formElement .input-group textarea:valid, #products form .formElement .input-group input:focus, #products form .formElement .input-group input:valid, #products form .formElement .input-group textarea:focus, #products form .formElement .input-group textarea:valid, #cart form .formElement .input-group input:focus, #cart form .formElement .input-group input:valid, #cart form .formElement .input-group textarea:focus, #cart form .formElement .input-group textarea:valid {
   border-color: #7da86b;
 }
-#realTimeProducts form .formElement .input-group textarea, #products form .formElement .input-group textarea {
+#realTimeProducts form .formElement .input-group textarea, #products form .formElement .input-group textarea, #cart form .formElement .input-group textarea {
   height: 7em;
   margin-top: 5px;
   padding: 5px 12px;
@@ -137,45 +137,46 @@ nav .nav-elements .nav-links .active:hover {
 }
 #realTimeProducts form .formElement .input-group input[type=number]::-webkit-inner-spin-button,
 #realTimeProducts form .formElement .input-group input[type=number]::-webkit-outer-spin-button, #products form .formElement .input-group input[type=number]::-webkit-inner-spin-button,
-#products form .formElement .input-group input[type=number]::-webkit-outer-spin-button {
+#products form .formElement .input-group input[type=number]::-webkit-outer-spin-button, #cart form .formElement .input-group input[type=number]::-webkit-inner-spin-button,
+#cart form .formElement .input-group input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-#realTimeProducts form #fe-title, #products form #fe-title {
+#realTimeProducts form #fe-title, #products form #fe-title, #cart form #fe-title {
   grid-area: 1/1/2/span 2;
 }
-#realTimeProducts form #fe-description, #products form #fe-description {
+#realTimeProducts form #fe-description, #products form #fe-description, #cart form #fe-description {
   grid-area: 3/1/5/span 3;
 }
-#realTimeProducts form #fe-price, #products form #fe-price {
+#realTimeProducts form #fe-price, #products form #fe-price, #cart form #fe-price {
   grid-area: 1/3/2/span 2;
 }
-#realTimeProducts form #fe-imgUrl, #products form #fe-imgUrl {
+#realTimeProducts form #fe-imgUrl, #products form #fe-imgUrl, #cart form #fe-imgUrl {
   grid-area: 1/5/2/span 2;
 }
-#realTimeProducts form #fe-code, #products form #fe-code {
+#realTimeProducts form #fe-code, #products form #fe-code, #cart form #fe-code {
   grid-area: 2/1/3/span 2;
 }
-#realTimeProducts form #fe-category, #products form #fe-category {
+#realTimeProducts form #fe-category, #products form #fe-category, #cart form #fe-category {
   grid-area: 2/3/3/span 2;
 }
-#realTimeProducts form #fe-stock, #products form #fe-stock {
+#realTimeProducts form #fe-stock, #products form #fe-stock, #cart form #fe-stock {
   grid-area: 2/5/3/span 2;
 }
-#realTimeProducts form #fe-status, #products form #fe-status {
+#realTimeProducts form #fe-status, #products form #fe-status, #cart form #fe-status {
   grid-area: 3/4/span 2/5;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#realTimeProducts form #fe-status .form-check, #products form #fe-status .form-check {
+#realTimeProducts form #fe-status .form-check, #products form #fe-status .form-check, #cart form #fe-status .form-check {
   width: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.7em;
 }
-#realTimeProducts form #fe-status .form-check input, #products form #fe-status .form-check input {
+#realTimeProducts form #fe-status .form-check input, #products form #fe-status .form-check input, #cart form #fe-status .form-check input {
   position: relative;
   width: 50px;
   height: 25px;
@@ -186,16 +187,16 @@ nav .nav-elements .nav-links .active:hover {
   transition: 0.5s;
   z-index: 0;
 }
-#realTimeProducts form #fe-status .form-check input:hover, #products form #fe-status .form-check input:hover {
+#realTimeProducts form #fe-status .form-check input:hover, #products form #fe-status .form-check input:hover, #cart form #fe-status .form-check input:hover {
   cursor: pointer;
 }
-#realTimeProducts form #fe-status .form-check input:checked, #products form #fe-status .form-check input:checked {
+#realTimeProducts form #fe-status .form-check input:checked, #products form #fe-status .form-check input:checked, #cart form #fe-status .form-check input:checked {
   background: #7da86b;
 }
-#realTimeProducts form #fe-status .form-check input:checked:before, #products form #fe-status .form-check input:checked:before {
+#realTimeProducts form #fe-status .form-check input:checked:before, #products form #fe-status .form-check input:checked:before, #cart form #fe-status .form-check input:checked:before {
   left: 25px;
 }
-#realTimeProducts form #fe-status .form-check input::before, #products form #fe-status .form-check input::before {
+#realTimeProducts form #fe-status .form-check input::before, #products form #fe-status .form-check input::before, #cart form #fe-status .form-check input::before {
   content: "";
   position: absolute;
   width: 25px;
@@ -208,23 +209,23 @@ nav .nav-elements .nav-links .active:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transition: 0.5s;
 }
-#realTimeProducts form #fe-status .form-check label, #products form #fe-status .form-check label {
+#realTimeProducts form #fe-status .form-check label, #products form #fe-status .form-check label, #cart form #fe-status .form-check label {
   font-size: 1.2em;
   font-weight: 400;
 }
-#realTimeProducts form #fe-status .form-check label:hover, #products form #fe-status .form-check label:hover {
+#realTimeProducts form #fe-status .form-check label:hover, #products form #fe-status .form-check label:hover, #cart form #fe-status .form-check label:hover {
   cursor: pointer;
 }
-#realTimeProducts form #fe-status .form-check:hover, #products form #fe-status .form-check:hover {
+#realTimeProducts form #fe-status .form-check:hover, #products form #fe-status .form-check:hover, #cart form #fe-status .form-check:hover {
   cursor: pointer;
 }
-#realTimeProducts form #fe-btn, #products form #fe-btn {
+#realTimeProducts form #fe-btn, #products form #fe-btn, #cart form #fe-btn {
   grid-area: 3/5/span 2/span 2;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#realTimeProducts form #fe-btn button, #products form #fe-btn button {
+#realTimeProducts form #fe-btn button, #products form #fe-btn button, #cart form #fe-btn button {
   width: 70%;
   padding: 5px 0;
   height: fit-content;
@@ -236,13 +237,13 @@ nav .nav-elements .nav-links .active:hover {
   font-size: 1.1em;
   transition: background-color 0.05s ease-in-out;
 }
-#realTimeProducts form #fe-btn button:hover, #products form #fe-btn button:hover {
+#realTimeProducts form #fe-btn button:hover, #products form #fe-btn button:hover, #cart form #fe-btn button:hover {
   cursor: pointer;
 }
-#realTimeProducts form #fe-btn button:active, #products form #fe-btn button:active {
+#realTimeProducts form #fe-btn button:active, #products form #fe-btn button:active, #cart form #fe-btn button:active {
   background-color: #5a8049;
 }
-#realTimeProducts .prodList, #products .prodList {
+#realTimeProducts .prodList, #products .prodList, #cart .prodList {
   height: fit-content;
   overflow: visible;
   display: grid;
@@ -253,7 +254,7 @@ nav .nav-elements .nav-links .active:hover {
   align-items: center;
   margin: 2em;
 }
-#realTimeProducts .prodList .productCard, #products .prodList .productCard {
+#realTimeProducts .prodList .productCard, #products .prodList .productCard, #cart .prodList .productCard {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -265,31 +266,32 @@ nav .nav-elements .nav-links .active:hover {
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
   transition: all 0.3s ease;
 }
-#realTimeProducts .prodList .productCard .imgContainer, #products .prodList .productCard .imgContainer {
+#realTimeProducts .prodList .productCard .imgContainer, #products .prodList .productCard .imgContainer, #cart .prodList .productCard .imgContainer {
   min-height: 12em;
   margin-bottom: 0.5em;
 }
-#realTimeProducts .prodList .productCard .imgContainer img, #products .prodList .productCard .imgContainer img {
+#realTimeProducts .prodList .productCard .imgContainer img, #products .prodList .productCard .imgContainer img, #cart .prodList .productCard .imgContainer img {
   width: 100%;
   border-radius: 5px;
 }
-#realTimeProducts .prodList .productCard h2, #products .prodList .productCard h2 {
+#realTimeProducts .prodList .productCard h2, #products .prodList .productCard h2, #cart .prodList .productCard h2 {
   margin-bottom: 0.5em;
+  overflow: hidden;
 }
-#realTimeProducts .prodList .productCard ul, #products .prodList .productCard ul {
+#realTimeProducts .prodList .productCard ul, #products .prodList .productCard ul, #cart .prodList .productCard ul {
   list-style-type: none;
   margin-bottom: 0.5em;
   overflow-y: scroll;
 }
-#realTimeProducts .prodList .productCard ul li span, #products .prodList .productCard ul li span {
+#realTimeProducts .prodList .productCard ul li span, #products .prodList .productCard ul li span, #cart .prodList .productCard ul li span {
   font-weight: 600;
   text-decoration: underline;
   color: #7da86b;
 }
-#realTimeProducts .prodList .productCard ul::-webkit-scrollbar, #products .prodList .productCard ul::-webkit-scrollbar {
+#realTimeProducts .prodList .productCard ul::-webkit-scrollbar, #products .prodList .productCard ul::-webkit-scrollbar, #cart .prodList .productCard ul::-webkit-scrollbar {
   width: 0;
 }
-#realTimeProducts .prodList .productCard button, #products .prodList .productCard button {
+#realTimeProducts .prodList .productCard button, #products .prodList .productCard button, #cart .prodList .productCard button {
   align-self: center;
   width: 90%;
   padding: 5px 0;
@@ -302,14 +304,67 @@ nav .nav-elements .nav-links .active:hover {
   font-size: 1.1em;
   transition: background-color 0.05s ease-in-out;
 }
-#realTimeProducts .prodList .productCard button:hover, #products .prodList .productCard button:hover {
+#realTimeProducts .prodList .productCard button:hover, #products .prodList .productCard button:hover, #cart .prodList .productCard button:hover {
   cursor: pointer;
 }
-#realTimeProducts .prodList .productCard button:active, #products .prodList .productCard button:active {
+#realTimeProducts .prodList .productCard button:active, #products .prodList .productCard button:active, #cart .prodList .productCard button:active {
   background-color: rgba(167, 82, 82, 0.8509803922);
 }
-#realTimeProducts .prodList .productCard:hover, #products .prodList .productCard:hover {
+#realTimeProducts .prodList .productCard:hover, #products .prodList .productCard:hover, #cart .prodList .productCard:hover {
   transform: scale(1.02);
+}
+
+#cart .cart-container {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+}
+#cart .cart-container .cartList {
+  height: fit-content;
+  overflow: visible;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: auto;
+  flex-wrap: wrap;
+  justify-items: center;
+  align-items: center;
+}
+#cart .cart-container .cartList .productCard {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: center;
+  width: 80%;
+  margin: 0.5em;
+  padding: 1em;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  transition: all 0.3s ease;
+}
+#cart .cart-container .cartList .productCard .imgContainer img {
+  text-align: center;
+  width: 100%;
+  border-radius: 5px;
+}
+#cart .cart-container .cartList .productCard .infoContainer {
+  padding: 0.5em 1em;
+}
+#cart .cart-container .cartList .productCard .infoContainer h2 {
+  height: fit-content;
+  margin-bottom: 0.5em;
+  overflow: hidden;
+}
+#cart .cart-container .cartList .productCard .infoContainer ul {
+  list-style-type: none;
+  margin-bottom: 0.5em;
+  overflow-y: scroll;
+}
+#cart .cart-container .cartList .productCard .infoContainer ul li span {
+  font-weight: 600;
+  text-decoration: underline;
+  color: #7da86b;
+}
+#cart .cart-container .cartList .productCard .infoContainer ul::-webkit-scrollbar {
+  width: 0;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -8,7 +8,7 @@ class CartsManagerMongo {
     }
 
     getCarts = async () => this.model.find();
-    getCart = async opts => this.model.findOne(opts);
+    getCart = async opts => this.model.findOne(opts).lean();
     createCart = async newCart => this.model.create(newCart);
     
     isProductOnCart = async (cid, pid) => {
@@ -41,10 +41,14 @@ class CartsManagerMongo {
     
     updateProductOnCart = async (cid, pid, quantity) => {
         const cart = await this.getCart({_id: cid});
-        const product = cart.products.find(prod => prod.product.toString() == pid);
+        // console.log(cart)
+        cart.products.forEach(prod => console.log(prod.product._id));
+        const product = cart.products.find(prod => prod.product._id.toString() == pid);
         
         if(product) {
             product.quantity += quantity.quantity;
+            if(product.quantity <= 0) throw Error('La cantidad de producto en el carrito es menor o igua la 0');
+
             return await this.model.findByIdAndUpdate({_id: cid}, cart);
         } else {
             throw Error('No se encontro un producto con el id indicado');
@@ -55,7 +59,7 @@ class CartsManagerMongo {
     
     deleteProductOnCart = async (cid, pid) => {
         const cart = await this.getCart({_id: cid});
-        const productIndex = cart.products.findIndex(prod => prod.product.toString() == pid);
+        const productIndex = cart.products.findIndex(prod => prod.product._id.toString() == pid);
         
         if(productIndex !== -1) {
             cart.products.splice(productIndex, 1);
