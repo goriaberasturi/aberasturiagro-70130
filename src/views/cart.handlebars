@@ -13,11 +13,19 @@
                         <li><span>price:</span> {{product.price}}</li>
                         <li><span>category:</span> {{product.category}}</li>
                         <li><span>stock:</span> {{product.stock}}</li>
-                        <li><span>quantity:</span> {{quantity}}</li>
                     </ul>
+                </div>
+                <div class="ctrlsContainer">
+                    <div id="{{product._id}}" class="cartCounter">
+                        <span class="minus">-</span>
+                        <span class="num">{{quantity}}</span>
+                        <span class="plus">+</span>
+                    </div>
+                    <buton class="deleteBtn">Eliminar</buton>
                 </div>
             </div>
             {{/each}}
         </article>
     </div>
 </section>
+<script src="./../../static/assets/js/cart.js"></script>

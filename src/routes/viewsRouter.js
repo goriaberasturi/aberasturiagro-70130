@@ -34,8 +34,9 @@ router.get('/realTimeProducts', async (req, res) => {
 });
 
 // Rutas cart
-router.get('/cart', async (req, res) => {
-    const cart = await cartService.getCart({_id: '66cbed2a3e4fe3ea4f17631a'});
+router.get('/carts/:cid', async (req, res) => {
+    const {cid} = req.params;
+    const cart = await cartService.getCart({_id: cid});
 
     res.render('cart', {
         isMenu: true,
