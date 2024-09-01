@@ -219,11 +219,13 @@
             }
 
             h2 {
+                font-size: 1.2em;
+                height: fit-content;
                 margin-bottom: 0.5em;
-                overflow: hidden;
             }
 
             ul {
+                height: 50%;
                 list-style-type: none;
                 margin-bottom: 0.5em;
                 overflow-y: scroll;

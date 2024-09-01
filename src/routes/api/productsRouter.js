@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import {Router} from 'express';
 import ProductsManagerMongo from '../../daos/MongoDb/products.manager.mongo.js'
 
 const router = Router();
@@ -9,16 +9,54 @@ const productService = new ProductsManagerMongo();
 
 router.get('/', async (req, res) => {
     try {
-        const limit = req.query.limit;
-        const productsDb = await productService.getProducts();
+        const {limit=10, pageNum, query = ''} = req.query;
+        let filter = {};
+        if(query) filter = {category: query};
+        let {sort} = req.query;
+        sort == 'desc' ? sort = -1 : sort = 1;
 
-        if(!limit) return res.status(200).send({status:'success', payload: productsDb});
-        if(isNaN(limit)) return res.status(400).send({status:'error', message: 'El limite debe ser un numero'});
+        const search = {limit, page: pageNum, sort};
+        
+        const {
+            docs,
+            totalPages,
+            prevPage,
+            nextPage,
+            page,
+            hasPrevPage,
+            hasNextPage
+        } = await productService.searchProducts(filter, search);
 
-        const productsFlt = await productService.getLimitedProducts(limit);
-        return res.status(200).send({status:'success', payload: productsFlt});
+        // Base de prevLink y nextLink
+        let prevLink = `http://localhost:8080/api/products?pageNum=${page-1}`;
+        let nextLink = `http://localhost:8080/api/products?pageNum=${page+1}`;
 
-    } catch (error) {
+        // Generacion de prevLink y nextLink
+        for(let key in req.query) {
+            if(key == 'pageNum') {
+                continue;
+            } else {
+                prevLink += `&${key}=${req.query[key]}`;
+                nextLink += `&${key}=${req.query[key]}`;
+            }
+        }
+        hasPrevPage ? 'holis :3' : prevLink = null;
+        hasNextPage ? 'holis :3' : nextLink = null;
+        
+        return res.status(200).send({
+            status:'success',
+            payload: docs,
+            totalPages,
+            prevPage,
+            nextPage,
+            page,
+            hasPrevPage,
+            hasNextPage,
+            prevLink,
+            nextLink
+        });
+
+    } catch(error) {
         console.log(error);
     }
 });

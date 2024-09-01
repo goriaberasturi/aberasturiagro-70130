@@ -1,3 +1,5 @@
+
+
 const counters = document.querySelectorAll('.cartCounter');
 
 const setAddFunction = (btn, num) => {
@@ -20,8 +22,6 @@ const setSubstractFunction = (btn, num) => {
 };
 
 counters.forEach(ctr => {
-    id = ctr.getAttribute('id');
-
     const plus = ctr.querySelector('.plus');
     const num = ctr.querySelector('.num');
     const minus = ctr.querySelector('.minus');

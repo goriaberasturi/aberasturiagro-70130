@@ -1,5 +1,16 @@
 <section id="products">
     <h1>Listado de Productos</h1>
+    <div class="pagination">
+        <div class="pagination-items">
+            {{#if hasPrevPage}}
+            <a href="{{prevLink}}">{{prevPage}}</a>
+            {{/if}}
+            <label for="">{{page}}</label>
+            {{#if hasNextPage}}
+            <a href="{{nextLink}}">{{nextPage}}</a>
+            {{/if}}
+        </div>
+    </div>
     <article class="prodList">
         {{#each products}}
         <div class="productCard">
@@ -14,7 +25,17 @@
                 <li><span>category:</span> {{category}}</li>
                 <li><span>stock:</span> {{stock}}</li>
             </ul>
+            <div id="{{_id}}" class="ctrlsContainer">
+                <div class="cartCounter">
+                    <span class="minus">-</span>
+                    <span class="num">1</span>
+                    <span class="plus">+</span>
+                </div>
+                <button class="addBtn">Agregar</button>
+            </div>
         </div>
         {{/each}}
     </article>
 </section>
+<script src="/socket.io/socket.io.js"></script>
+<script src="./../../static/assets/js/products.js"></script>

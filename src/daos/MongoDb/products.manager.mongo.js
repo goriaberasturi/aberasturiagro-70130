@@ -6,6 +6,7 @@ class ProductsManagerMongo {
         this.model = productModel;
     }
 
+    searchProducts = async (opts, {limit, page=1, sort=1}) => await this.model.paginate(opts, {limit, page, sort: {price: sort}, lean: true});
     getProducts = async () => await this.model.find().lean();
     createProduct = async newProduct => await this.model.create(newProduct);
     updateProduct = async  (id, updtFields) => await this.model.findByIdAndUpdate({_id: id}, updtFields);

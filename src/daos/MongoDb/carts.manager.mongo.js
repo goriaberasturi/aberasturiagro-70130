@@ -13,8 +13,7 @@ class CartsManagerMongo {
     
     isProductOnCart = async (cid, pid) => {
         const cart = await this.getCart({_id: cid});
-        
-        return cart.products.some(prod => prod.product.toString() == pid);
+        return cart.products.some(prod => prod.product._id.toString() == pid);
     };
     
     addProductToCart = async (cid, product) => {

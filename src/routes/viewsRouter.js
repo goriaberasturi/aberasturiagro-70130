@@ -8,41 +8,99 @@ const cartService = new CartsManagerMongo;
 
 // Rutas home
 router.get('/', async (req, res) => {
-    res.render('home', {
-        isMenu: true,
-        prodLink: ' active',
-        products: await productService.getProducts()
-    });
+    try {
+        res.render('home', {
+            isMenu: true,
+            prodLink: 'active',
+            products: await productService.getProducts()
+        });
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 // Rutas products
 router.get('/products', async (req, res) => {
-    res.render('home', {
-        isMenu: true,
-        prodLink: ' active',
-        products: await productService.getProducts()
-    });
+    try {
+        const {limit=10, pageNum, query = ''} = req.query;
+        let filter = {};
+        if(query) filter = {category: query};
+        let {sort} = req.query;
+        sort == 'desc' ? sort = -1 : sort = 1;
+
+        const search = {limit, page: pageNum, sort};
+        
+        const {
+            docs,
+            prevPage,
+            nextPage,
+            page,
+            hasPrevPage,
+            hasNextPage
+        } = await productService.searchProducts(filter, search);
+
+        // Base de prevLink y nextLink
+        let prevLink = `http://localhost:8080/products?pageNum=${page-1}`;
+        let nextLink = `http://localhost:8080/products?pageNum=${page+1}`;
+
+        // Generacion de prevLink y nextLink
+        for(let key in req.query) {
+            if(key == 'pageNum') {
+                continue;
+            } else {
+                prevLink += `&${key}=${req.query[key]}`;
+                nextLink += `&${key}=${req.query[key]}`;
+            }
+        };
+
+        hasPrevPage ? 'holis :3' : prevLink = null;
+        hasNextPage ? 'holis :3' : nextLink = null;
+
+        res.render('home', {
+            isMenu: true,
+            prodLink: 'active',
+            products: docs,
+            prevPage,
+            nextPage,
+            page,
+            hasPrevPage,
+            hasNextPage,
+            prevLink,
+            nextLink
+        });
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 // Rutas real time products
 router.get('/realTimeProducts', async (req, res) => {
-    res.render('realTimeProducts', {
-        isMenu: true,
-        rtpLink: ' active',
-        products: await productService.getProducts()
-    });
+    try {
+        const {docs} = await productService.searchProducts({}, {});
+        res.render('realTimeProducts', {
+            isMenu: true,
+            rtpLink: 'active',
+            products: docs
+        });
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 // Rutas cart
 router.get('/carts/:cid', async (req, res) => {
-    const {cid} = req.params;
-    const cart = await cartService.getCart({_id: cid});
-
-    res.render('cart', {
-        isMenu: true,
-        cartLink: ' active',
-        products: cart.products
-    });
+    try {
+        const {cid} = req.params;
+        const cart = await cartService.getCart({_id: cid});
+    
+        res.render('cart', {
+            isMenu: true,
+            cartLink: ' active',
+            products: cart.products
+        });
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 export default router;

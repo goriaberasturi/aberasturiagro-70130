@@ -275,10 +275,12 @@ nav .nav-elements .nav-links .active:hover {
   border-radius: 5px;
 }
 #realTimeProducts .prodList .productCard h2, #products .prodList .productCard h2, #cart .prodList .productCard h2 {
+  font-size: 1.2em;
+  height: fit-content;
   margin-bottom: 0.5em;
-  overflow: hidden;
 }
 #realTimeProducts .prodList .productCard ul, #products .prodList .productCard ul, #cart .prodList .productCard ul {
+  height: 50%;
   list-style-type: none;
   margin-bottom: 0.5em;
   overflow-y: scroll;
@@ -312,6 +314,82 @@ nav .nav-elements .nav-links .active:hover {
 }
 #realTimeProducts .prodList .productCard:hover, #products .prodList .productCard:hover, #cart .prodList .productCard:hover {
   transform: scale(1.02);
+}
+
+#products .pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+#products .pagination-items {
+  display: flex;
+  gap: 1em;
+  font-size: 1.2em;
+}
+#products .pagination-items a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4em;
+  height: 1.4em;
+  text-decoration: none;
+  color: black;
+}
+#products .pagination-items label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4em;
+  height: 1.4em;
+  border-radius: 3px;
+  border: 2px solid #7da86b;
+}
+#products .prodList .productCard .ctrlsContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+}
+#products .prodList .productCard .ctrlsContainer .cartCounter {
+  height: 2.2em;
+  width: 50%;
+  min-width: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  border: 2px solid #7da86b;
+}
+#products .prodList .productCard .ctrlsContainer .cartCounter span {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+}
+#products .prodList .productCard .ctrlsContainer .cartCounter span.num {
+  font-size: 1em;
+  border-right: 1px solid #7da86b;
+  border-left: 1px solid #7da86b;
+  pointer-events: none;
+}
+#products .prodList .productCard .ctrlsContainer button {
+  width: 50%;
+  padding: 5px 0;
+  height: fit-content;
+  border: none;
+  border-radius: 3px;
+  background-color: #7da86b;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1em;
+  transition: background-color 0.05s ease-in-out;
+}
+#products .prodList .productCard .ctrlsContainer button:hover {
+  cursor: pointer;
+}
+#products .prodList .productCard .ctrlsContainer button:active {
+  background-color: #5a8049;
 }
 
 #cart .cart-container {
