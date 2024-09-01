@@ -97,9 +97,20 @@
                     }
 
                     .deleteBtn {
+                        width: 70%;
+                        height: 2.2em;
+                        text-align: center;
+                        line-height: 2.2em; //Centra verticalmente el texto (tiene que ser igual al height)
                         cursor: pointer;
-                        font-size: 1.1em;
+                        font-size: 1em;
                         color: red;
+                        border-radius: 3px;
+                        border: 2px solid rgba(0,0,0,0);
+                        transition: all .1s linear;
+
+                        &:hover {
+                            border: 2px solid red;
+                        }
                     }
                 }
             }

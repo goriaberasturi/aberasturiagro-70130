@@ -41,6 +41,24 @@ const socketProducts = (socketServer) => {
 
             if(response) socketServer.emit('addedProductToCart', `Producto agregado al carrito:\n- Producto: ${product.title}\n- Cantidad: ${prod.quantity}`);
         });
+
+        socket.on('deleteFromCart', async pid => {
+            const cid = '66cbed2a3e4fe3ea4f17631a';
+            const product = await pS.getProduct({_id: pid});
+            const response = await cS.deleteProductOnCart(cid, pid);
+            
+            if(response) socketServer.emit('deletedFromCart', {message: `Producto eliminado carrito:\n${product.title}`, pid});
+        });
+        
+        socket.on('incCartQuanity', async pid => {
+            const cid = '66cbed2a3e4fe3ea4f17631a';
+            await cS.updateProductOnCart(cid, pid, {quantity: 1});
+        })
+        
+        socket.on('decCartQuanity', async pid => {
+            const cid = '66cbed2a3e4fe3ea4f17631a';
+            await cS.updateProductOnCart(cid, pid, {quantity: -1});
+        })
     });
 };
 

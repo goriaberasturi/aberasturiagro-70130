@@ -15,8 +15,8 @@
                         <li><span>stock:</span> {{product.stock}}</li>
                     </ul>
                 </div>
-                <div class="ctrlsContainer">
-                    <div id="{{product._id}}" class="cartCounter">
+                <div id="{{product._id}}" class="ctrlsContainer">
+                    <div class="cartCounter">
                         <span class="minus">-</span>
                         <span class="num">{{quantity}}</span>
                         <span class="plus">+</span>
@@ -28,4 +28,5 @@
         </article>
     </div>
 </section>
+<script src="/socket.io/socket.io.js"></script>
 <script src="./../../static/assets/js/cart.js"></script>
