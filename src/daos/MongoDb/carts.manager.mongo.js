@@ -40,8 +40,6 @@ class CartsManagerMongo {
     
     updateProductOnCart = async (cid, pid, quantity) => {
         const cart = await this.getCart({_id: cid});
-        // console.log(cart)
-        cart.products.forEach(prod => console.log(prod.product._id));
         const product = cart.products.find(prod => prod.product._id.toString() == pid);
         
         if(product) {

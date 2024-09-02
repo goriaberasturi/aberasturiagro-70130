@@ -43,6 +43,6 @@ counters.forEach(ctr => {
     setDeleteFunction(deleteBtn, pid);
 });
 
-socketClient.on('deletedFromCart', async ({message, pid}) => {
+socketClient.on('deletedFromCart', async ({message}) => {
     alert(message);
 });

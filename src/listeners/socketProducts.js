@@ -47,7 +47,7 @@ const socketProducts = (socketServer) => {
             const product = await pS.getProduct({_id: pid});
             const response = await cS.deleteProductOnCart(cid, pid);
             
-            if(response) socketServer.emit('deletedFromCart', {message: `Producto eliminado carrito:\n${product.title}`, pid});
+            if(response) socketServer.emit('deletedFromCart', {message: `Eliminaste "${product.title}" del carrito`, pid});
         });
         
         socket.on('incCartQuanity', async pid => {
