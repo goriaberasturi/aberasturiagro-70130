@@ -29,7 +29,7 @@ const socketProducts = (socketServer) => {
 
         // Cart events
         socket.on('addToCart', async prod => {
-            const cid = '66cbed2a3e4fe3ea4f17631a';
+            const cid = '66ceacd2146f2c5d2730defd';
             const product = await pS.getProduct({_id: prod.product});
 
             let response;
@@ -43,7 +43,7 @@ const socketProducts = (socketServer) => {
         });
 
         socket.on('deleteFromCart', async pid => {
-            const cid = '66cbed2a3e4fe3ea4f17631a';
+            const cid = '66ceacd2146f2c5d2730defd';
             const product = await pS.getProduct({_id: pid});
             const response = await cS.deleteProductOnCart(cid, pid);
             
@@ -51,12 +51,12 @@ const socketProducts = (socketServer) => {
         });
         
         socket.on('incCartQuanity', async pid => {
-            const cid = '66cbed2a3e4fe3ea4f17631a';
+            const cid = '66ceacd2146f2c5d2730defd';
             await cS.updateProductOnCart(cid, pid, {quantity: 1});
         })
         
         socket.on('decCartQuanity', async pid => {
-            const cid = '66cbed2a3e4fe3ea4f17631a';
+            const cid = '66ceacd2146f2c5d2730defd';
             await cS.updateProductOnCart(cid, pid, {quantity: -1});
         })
     });
