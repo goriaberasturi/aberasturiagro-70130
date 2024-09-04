@@ -23,10 +23,7 @@ class CartsManagerMongo {
         
         if(foundProduct) {
             if(await this.isProductOnCart(cid, pid)) {
-                const updtProduct = cart.products.find(prod => prod.product.toString() == pid);
-                updtProduct.quantity += product.quantity;
-                
-                return await this.model.findByIdAndUpdate({_id: cid}, cart);
+                return this.updateProductOnCart(cid, pid, {quantity: product.quantity});
                 
             } else {
                 cart.products.push({product: pid, quantity: product.quantity});
