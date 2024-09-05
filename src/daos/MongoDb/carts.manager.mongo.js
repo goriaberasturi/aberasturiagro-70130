@@ -1,5 +1,6 @@
 import cartModel from "../../models/carts.model.js";
 import ProductMangerMongo from './products.manager.mongo.js';
+import { isValidObjectId } from "mongoose";
 
 class CartsManagerMongo {
     constructor() {
@@ -19,14 +20,17 @@ class CartsManagerMongo {
     addProductToCart = async (cid, product) => {
         const cart = await this.getCart({_id: cid});
         const pid = product.product;
+        if(!await this.isValidId(pid)) throw Error('El Id del producto tiene un formato invalido');;
         const foundProduct = this.ps.getProduct({_id: pid});
         
         if(foundProduct) {
+            if(isNaN(Number(product.quantity))) throw Error('La cantidad debe ser un numero');
             if(await this.isProductOnCart(cid, pid)) {
-                return this.updateProductOnCart(cid, pid, {quantity: product.quantity});
+                return this.updateProductOnCart(cid, pid, {quantity: Number(product.quantity)});
                 
             } else {
-                cart.products.push({product: pid, quantity: product.quantity});
+                if(Number(product.quantity) <= 0 ) throw Error('La cantidad de productos debe ser mayor que 0');
+                cart.products.push({product: pid, quantity: Number(product.quantity)});
                 
                 return await this.model.findByIdAndUpdate({_id: cid}, cart);
             };
@@ -40,7 +44,9 @@ class CartsManagerMongo {
         const product = cart.products.find(prod => prod.product._id.toString() == pid);
         
         if(product) {
-            product.quantity += quantity.quantity;
+            if(isNaN(Number(quantity.quantity))) throw Error('La cantidad debe ser un numero');
+            product.quantity += Number(quantity.quantity);
+
             if(product.quantity <= 0) throw Error('La cantidad de producto en el carrito es menor o igua la 0');
 
             return await this.model.findByIdAndUpdate({_id: cid}, cart);
@@ -62,6 +68,8 @@ class CartsManagerMongo {
             throw Error('No se encontro un producto con el id indicado');
         }
     };
+
+    isValidId = async id => isValidObjectId(id);
 };
 
 export default CartsManagerMongo;
