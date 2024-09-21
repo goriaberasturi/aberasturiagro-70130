@@ -1,0 +1,130 @@
+#login {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(192,226,178);
+    background: linear-gradient(0deg, rgba(192,226,178,1) 0%, rgba(240,252,234,1) 42%, rgba(255,255,255,1) 100%);
+
+    .login_form {
+        display: grid;
+        width: 400px;
+        margin: 20px;
+        grid-template: 50px auto / 1fr;
+        justify-content: center;
+        border-radius: 10px;
+        background-color: white;
+        overflow: hidden;
+
+        .title_div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #7da86b;
+
+            h1 {
+                text-align: center;
+                color: white;
+                font-size: 25px;
+                font-weight: 600;
+                align-self: center;
+                justify-self: center;
+            }
+        }
+
+        form {
+            width: 80%;
+            align-self: center;
+            justify-self: center;
+            margin-bottom: 10px;
+
+            .text_field {
+                position: relative;
+                border-bottom: 2px solid #adadad;
+                margin: 30px 0;
+
+                input {
+                    width: 100%;
+                    height: 40px;
+                    padding: 0 5px;
+                    font-size: 16px;
+                    border: none;
+                    background: none;
+                    outline: none;
+                }
+
+                label {
+                    position: absolute;
+                    top: 50%;
+                    left: 5px;
+                    color: #adadad;
+                    transform: translateY(-50%);
+                    font-size: 16px;
+                    pointer-events: none;
+                    transition: .2s;
+                }
+
+                & span::before {
+                    content: '';
+                    position: absolute;
+                    top: 40px;
+                    left: 0;
+                    width: 0%;
+                    height: 2px;
+                    background: #7da86b;
+                    transition: .4s;
+                }
+
+                & input:focus~label,
+                & input:valid~label {
+                    top: -5px;
+                    color: #7da86b;
+                }
+
+                & input:focus~span::before,
+                & input:valid~span::before {
+                    width: 100%;
+                }
+            }
+
+            input[type="submit"] {
+                width: 100%;
+                height: 40px;
+                cursor: pointer;
+                outline: none;
+                border: none;
+                background: #7da86b;
+                border-radius: 3px;
+                font-size: 18px;
+                font-weight: 600;
+                color: white;
+                transition: .2s;
+
+                &:hover {
+                    background: #628454;
+                }
+            }
+        }
+
+        .reset_create {
+            margin: 15px 0px;
+            border-top: 2px dashed #7da86b;
+
+            a {
+                color: #adadad;
+                margin: 15px 0px;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            p {
+                a {
+                    color: #7da86b;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}

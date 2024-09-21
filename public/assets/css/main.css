@@ -492,4 +492,115 @@ nav .nav-elements .nav-links .active:hover {
   border: 2px solid red;
 }
 
+#login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(192, 226, 178);
+  background: linear-gradient(0deg, rgb(192, 226, 178) 0%, rgb(240, 252, 234) 42%, rgb(255, 255, 255) 100%);
+}
+#login .login_form {
+  display: grid;
+  width: 400px;
+  margin: 20px;
+  grid-template: 50px auto/1fr;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: white;
+  overflow: hidden;
+}
+#login .login_form .title_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #7da86b;
+}
+#login .login_form .title_div h1 {
+  text-align: center;
+  color: white;
+  font-size: 25px;
+  font-weight: 600;
+  align-self: center;
+  justify-self: center;
+}
+#login .login_form form {
+  width: 80%;
+  align-self: center;
+  justify-self: center;
+  margin-bottom: 10px;
+}
+#login .login_form form .text_field {
+  position: relative;
+  border-bottom: 2px solid #adadad;
+  margin: 30px 0;
+}
+#login .login_form form .text_field input {
+  width: 100%;
+  height: 40px;
+  padding: 0 5px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  outline: none;
+}
+#login .login_form form .text_field label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: #adadad;
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.2s;
+}
+#login .login_form form .text_field span::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #7da86b;
+  transition: 0.4s;
+}
+#login .login_form form .text_field input:focus ~ label, #login .login_form form .text_field input:valid ~ label {
+  top: -5px;
+  color: #7da86b;
+}
+#login .login_form form .text_field input:focus ~ span::before, #login .login_form form .text_field input:valid ~ span::before {
+  width: 100%;
+}
+#login .login_form form input[type=submit] {
+  width: 100%;
+  height: 40px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background: #7da86b;
+  border-radius: 3px;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  transition: 0.2s;
+}
+#login .login_form form input[type=submit]:hover {
+  background: #628454;
+}
+#login .login_form .reset_create {
+  margin: 15px 0px;
+  border-top: 2px dashed #7da86b;
+}
+#login .login_form .reset_create a {
+  color: #adadad;
+  margin: 15px 0px;
+}
+#login .login_form .reset_create a:hover {
+  text-decoration: underline;
+}
+#login .login_form .reset_create p a {
+  color: #7da86b;
+  font-weight: 500;
+}
+
 /*# sourceMappingURL=main.css.map */

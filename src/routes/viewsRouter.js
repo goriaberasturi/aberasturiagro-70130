@@ -103,4 +103,15 @@ router.get('/carts/:cid', async (req, res) => {
     }
 });
 
+// Ruta login
+router.get('/login', async (req, res) => {
+    try {
+        res.render('login', {
+            isMenu: true
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 export default router;
