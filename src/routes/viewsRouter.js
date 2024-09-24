@@ -58,6 +58,7 @@ router.get('/products', async (req, res) => {
 
         res.render('home', {
             isMenu: true,
+            isCart: true,
             prodLink: 'active',
             products: docs,
             prevPage,
@@ -79,6 +80,7 @@ router.get('/realTimeProducts', async (req, res) => {
         const {docs} = await productService.searchProducts({}, {});
         res.render('realTimeProducts', {
             isMenu: true,
+            isCart: true,
             rtpLink: 'active',
             products: docs
         });
@@ -95,6 +97,7 @@ router.get('/carts/:cid', async (req, res) => {
     
         res.render('cart', {
             isMenu: true,
+            isCart: false,
             cartLink: ' active',
             products: cart.products
         });
@@ -107,11 +110,17 @@ router.get('/carts/:cid', async (req, res) => {
 router.get('/login', async (req, res) => {
     try {
         res.render('login', {
-            isMenu: true
+            isMenu: true,
+            isCart: false
         });
     } catch (error) {
         console.log(error);
     }
 });
+
+router.post('/login', async (req, res) => {
+    console.log(req.body);
+    res.redirect('/products');
+})
 
 export default router;
