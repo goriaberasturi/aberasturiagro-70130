@@ -1,4 +1,4 @@
-#login {
+#login, #register {
     height: 100%;
     display: flex;
     justify-content: center;
@@ -58,7 +58,7 @@
                     top: 50%;
                     left: 5px;
                     color: #adadad;
-                    transform: translateY(-50%);
+                    transform: translateY(-65%);
                     font-size: 16px;
                     pointer-events: none;
                     transition: .2s;
@@ -128,6 +128,10 @@
                     color: #7da86b;
                     font-weight: 500;
                 }
+            }
+
+            .register-redirect {
+                margin-top: 15px;
             }
         }
     }

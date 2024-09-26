@@ -1,0 +1,33 @@
+<section id="register">
+    <div class="login_form">
+        <div class="title_div">
+            <h1>Registrarse</h1>
+        </div>
+        <form method="post" action="/sessions/register">
+            <div class="text_field">
+                <input type="text" name="first_name" required>
+                <span></span>
+                <label for="first_name">Nombre</label>
+            </div>
+            <div class="text_field">
+                <input type="text" name="last_name" required>
+                <span></span>
+                <label for="last_name">Apellido</label>
+            </div>
+            <div class="text_field">
+                <input type="text" name="email" required>
+                <span></span>
+                <label for="email">E-mail</label>
+            </div>
+            <div class="text_field">
+                <input type="password" name="password" required>
+                <span></span>
+                <label for="password">Contraseña</label>
+            </div>
+            <input type="submit" value="Registrarme">
+        </form>
+        <div class="reset_create">
+            <p class="register-redirect">Ya tienes una cuenta? <a href="/login">Inicia sesion</a></p>
+        </div>
+    </div>
+</section>

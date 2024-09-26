@@ -496,7 +496,7 @@ body {
   border: 2px solid red;
 }
 
-#login {
+#login, #register {
   height: 100%;
   display: flex;
   justify-content: center;
@@ -504,7 +504,7 @@ body {
   background: rgb(192, 226, 178);
   background: linear-gradient(0deg, rgb(192, 226, 178) 0%, rgb(240, 252, 234) 42%, rgb(255, 255, 255) 100%);
 }
-#login .login_form {
+#login .login_form, #register .login_form {
   display: grid;
   width: 400px;
   margin: 20px;
@@ -514,13 +514,13 @@ body {
   background-color: white;
   overflow: hidden;
 }
-#login .login_form .title_div {
+#login .login_form .title_div, #register .login_form .title_div {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #7da86b;
 }
-#login .login_form .title_div h1 {
+#login .login_form .title_div h1, #register .login_form .title_div h1 {
   text-align: center;
   color: white;
   font-size: 25px;
@@ -528,18 +528,18 @@ body {
   align-self: center;
   justify-self: center;
 }
-#login .login_form form {
+#login .login_form form, #register .login_form form {
   width: 80%;
   align-self: center;
   justify-self: center;
   margin-bottom: 10px;
 }
-#login .login_form form .text_field {
+#login .login_form form .text_field, #register .login_form form .text_field {
   position: relative;
   border-bottom: 2px solid #adadad;
   margin: 30px 0;
 }
-#login .login_form form .text_field input {
+#login .login_form form .text_field input, #register .login_form form .text_field input {
   width: 100%;
   height: 40px;
   padding: 0 5px;
@@ -548,17 +548,17 @@ body {
   background: none;
   outline: none;
 }
-#login .login_form form .text_field label {
+#login .login_form form .text_field label, #register .login_form form .text_field label {
   position: absolute;
   top: 50%;
   left: 5px;
   color: #adadad;
-  transform: translateY(-50%);
+  transform: translateY(-65%);
   font-size: 16px;
   pointer-events: none;
   transition: 0.2s;
 }
-#login .login_form form .text_field span::before {
+#login .login_form form .text_field span::before, #register .login_form form .text_field span::before {
   content: "";
   position: absolute;
   top: 40px;
@@ -568,14 +568,14 @@ body {
   background: #7da86b;
   transition: 0.4s;
 }
-#login .login_form form .text_field input:focus ~ label, #login .login_form form .text_field input:valid ~ label {
+#login .login_form form .text_field input:focus ~ label, #login .login_form form .text_field input:valid ~ label, #register .login_form form .text_field input:focus ~ label, #register .login_form form .text_field input:valid ~ label {
   top: -5px;
   color: #7da86b;
 }
-#login .login_form form .text_field input:focus ~ span::before, #login .login_form form .text_field input:valid ~ span::before {
+#login .login_form form .text_field input:focus ~ span::before, #login .login_form form .text_field input:valid ~ span::before, #register .login_form form .text_field input:focus ~ span::before, #register .login_form form .text_field input:valid ~ span::before {
   width: 100%;
 }
-#login .login_form form input[type=submit] {
+#login .login_form form input[type=submit], #register .login_form form input[type=submit] {
   width: 100%;
   height: 40px;
   cursor: pointer;
@@ -588,27 +588,30 @@ body {
   color: white;
   transition: 0.2s;
 }
-#login .login_form form input[type=submit]:hover {
+#login .login_form form input[type=submit]:hover, #register .login_form form input[type=submit]:hover {
   background: #628454;
 }
-#login .login_form .reset_create {
+#login .login_form .reset_create, #register .login_form .reset_create {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 15px 0px;
   border-top: 2px dashed #7da86b;
 }
-#login .login_form .reset_create a {
+#login .login_form .reset_create a, #register .login_form .reset_create a {
   text-decoration: none;
   color: #adadad;
   margin: 15px 0px;
 }
-#login .login_form .reset_create a:hover {
+#login .login_form .reset_create a:hover, #register .login_form .reset_create a:hover {
   text-decoration: underline;
 }
-#login .login_form .reset_create p a {
+#login .login_form .reset_create p a, #register .login_form .reset_create p a {
   color: #7da86b;
   font-weight: 500;
+}
+#login .login_form .reset_create .register-redirect, #register .login_form .reset_create .register-redirect {
+  margin-top: 15px;
 }
 
 /*# sourceMappingURL=main.css.map */

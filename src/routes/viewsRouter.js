@@ -1,6 +1,7 @@
 import { Router } from "express";
 import ProductManagerMongo from '../daos/MongoDb/products.manager.mongo.js';
 import CartsManagerMongo from "../daos/MongoDb/carts.manager.mongo.js";
+import authMdlwr from './../middleware/auth.middleware.js'
 
 const router = Router();
 const productService = new ProductManagerMongo;
@@ -75,7 +76,7 @@ router.get('/products', async (req, res) => {
 });
 
 // Rutas real time products
-router.get('/realTimeProducts', async (req, res) => {
+router.get('/realTimeProducts', authMdlwr, async (req, res) => {
     try {
         const {docs} = await productService.searchProducts({}, {});
         res.render('realTimeProducts', {
@@ -118,9 +119,15 @@ router.get('/login', async (req, res) => {
     }
 });
 
-router.post('/login', async (req, res) => {
-    console.log(req.body);
-    res.redirect('/products');
-})
+router.get('/register', async (req, res) => {
+    try {
+        res.render('register', {
+            isMenu: true,
+            isCart: false
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 export default router;

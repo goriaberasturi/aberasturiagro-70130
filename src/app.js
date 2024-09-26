@@ -10,6 +10,10 @@ import socketProducts from './listeners/socketProducts.js';
 import {Server} from 'socket.io';
 import connectDB from './config/index.js';
 
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import MongoStore from 'connect-mongo'
+
 
 // Config. de server
 const app = express();
@@ -40,6 +44,16 @@ app.use(express.urlencoded({extended: true}));
 // Middleware para configurar la carpeta static
 app.use('/static', express.static(path.join(rootDir, 'public')));
 app.use(logger('dev'));
+app.use(cookieParser('palabraSecreta'));
+app.use(session({
+    store: MongoStore.create({
+        mongoUrl: 'mongodb+srv://goricarhue2015:baseecommerce123@cluster0.ft6cz.mongodb.net/aberasturi-agro',
+        ttl: 10000
+    }),
+    secret: 'palabrita_secreta',
+    resave: true,
+    saveUninitialized: true
+}));
 connectDB();
 
 
