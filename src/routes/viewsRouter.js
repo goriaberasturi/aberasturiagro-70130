@@ -2,6 +2,7 @@ import { Router } from "express";
 import ProductManagerMongo from '../daos/MongoDb/products.manager.mongo.js';
 import CartsManagerMongo from "../daos/MongoDb/carts.manager.mongo.js";
 import authMdlwr from './../middleware/auth.middleware.js'
+import { passportCall } from "../utils/passport/passportCall.js";
 
 const router = Router();
 const productService = new ProductManagerMongo;
@@ -91,15 +92,15 @@ router.get('/realTimeProducts', authMdlwr, async (req, res) => {
 });
 
 // Rutas cart
-router.get('/carts/:cid', async (req, res) => {
+router.get('/cart/:cid', passportCall('jwt'), async (req, res) => {
     try {
-        const {cid} = req.params;
+        const {cid} = req.params
         const cart = await cartService.getCart({_id: cid});
     
         res.render('cart', {
             isMenu: true,
             isCart: false,
-            cartLink: ' active',
+            cartLink: 'active',
             products: cart.products
         });
     } catch (error) {

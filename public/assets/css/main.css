@@ -591,6 +591,10 @@ body {
 #login .login_form form input[type=submit]:hover, #register .login_form form input[type=submit]:hover {
   background: #628454;
 }
+#login .login_form form input[type=date], #register .login_form form input[type=date] {
+  font-family: "Poppins", sans-serif;
+  color: #adadad;
+}
 #login .login_form .reset_create, #register .login_form .reset_create {
   display: flex;
   flex-direction: column;

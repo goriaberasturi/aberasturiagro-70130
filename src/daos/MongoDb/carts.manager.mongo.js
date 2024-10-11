@@ -10,7 +10,7 @@ class CartsManagerMongo {
 
     getCarts = async () => this.model.find();
     getCart = async opts => this.model.findOne(opts).lean();
-    createCart = async newCart => this.model.create(newCart);
+    createCart = async () => this.model.create({products: []});
     
     isProductOnCart = async (cid, pid) => {
         const cart = await this.getCart({_id: cid});

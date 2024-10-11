@@ -3,7 +3,7 @@
         <div class="title_div">
             <h1>Registrarse</h1>
         </div>
-        <form method="post" action="/sessions/register">
+        <form method="post" action="/api/sessions/register">
             <div class="text_field">
                 <input type="text" name="first_name" required>
                 <span></span>
@@ -23,6 +23,9 @@
                 <input type="password" name="password" required>
                 <span></span>
                 <label for="password">Contraseña</label>
+            </div>
+            <div class="text_field">
+                <input type="date" name="birthday" required>
             </div>
             <input type="submit" value="Registrarme">
         </form>

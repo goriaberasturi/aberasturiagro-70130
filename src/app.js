@@ -7,13 +7,12 @@ import path from 'path';
 import appRouter from './routes/index.js'
 import socketProducts from './listeners/socketProducts.js';
 
-import {Server} from 'socket.io';
+import { Server } from 'socket.io';
 import connectDB from './config/index.js';
 
 import cookieParser from 'cookie-parser';
-import session from 'express-session';
-import MongoStore from 'connect-mongo'
-
+import passport from 'passport';
+import { initializePassport } from './config/passport.config.js'
 
 // Config. de server
 const app = express();
@@ -23,7 +22,7 @@ const PORT = process.env.PORT || 8080;
 // Config. de websocket
 const httpServer = app.listen(PORT, () => {
     console.log(`Servidor en puerto ${PORT}`);
-    console.log(`http://localhost:${PORT}/realTimeProducts`);
+    console.log(`http://localhost:${PORT}/login`);
 });
 const io = new Server(httpServer);
 
@@ -45,15 +44,13 @@ app.use(express.urlencoded({extended: true}));
 app.use('/static', express.static(path.join(rootDir, 'public')));
 app.use(logger('dev'));
 app.use(cookieParser('palabraSecreta'));
-app.use(session({
-    store: MongoStore.create({
-        mongoUrl: 'mongodb+srv://goricarhue2015:baseecommerce123@cluster0.ft6cz.mongodb.net/aberasturi-agro',
-        ttl: 10000
-    }),
-    secret: 'palabrita_secreta',
-    resave: true,
-    saveUninitialized: true
-}));
+
+
+// Passport jwt
+app.use(passport.initialize());
+initializePassport();
+
+
 connectDB();
 
 

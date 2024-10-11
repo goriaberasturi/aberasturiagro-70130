@@ -28,7 +28,6 @@ const setAddToCartFunction = (btn, pid, qty) => {
             product: pid,
             quantity
         }
-        console.log(newProduct);
 
         socketClient.emit('addToCart', newProduct);
 
