@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
+import { config } from './../config/index.js';
 
-const PRIVATE_KEY = 'lT9nxCqqWIewEqHT7qjC9zLGW35fkS';
+const generateToken = user => jwt.sign(user, config.private_key, { expiresIn: '1h' });
 
-const generateToken = user => jwt.sign(user, PRIVATE_KEY, {expiresIn: '1h'});
-
-export {generateToken, PRIVATE_KEY};
+export { generateToken };

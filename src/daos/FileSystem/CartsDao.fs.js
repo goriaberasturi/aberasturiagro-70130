@@ -1,5 +1,5 @@
 import fs from 'fs';
-import ProductManager from './ProductManagerFs.js';
+import ProductManager from './ProductsDao.fs.js';
 const ruta = './data/carts.json';
 const rutaTest = './Proyecto Final/data/carts.json';
 
@@ -9,7 +9,7 @@ class CartManager {
     }
 
     // Devuelve un array que contiene todos los carts. Si no existe el archivo retorna un array vacio
-    async getCarts() {
+    async get() {
         try {
             const result = await fs.promises.readFile(this.path, 'utf-8');
             return JSON.parse(result);
@@ -20,9 +20,9 @@ class CartManager {
     }
 
     // Devuelve el cart cuyo id se paso por parametro y el array de carts. Si no lo encuentra devuelve un error
-    async getCartById(id) {
+    async getBy(id) {
         try {
-            const carts = await this.getCarts();
+            const carts = await this.get();
             const cart = carts.find(cart => cart.id == id);
             
             if (cart) {
@@ -37,9 +37,9 @@ class CartManager {
     }
 
     // Agrega al array de carts el cart pasado por parametro y lo retorna
-    async addCarts(cart) {
+    async create(cart) {
         try {
-            const carts = await this.getCarts();
+            const carts = await this.get();
             const addedCart = {}
             
             if(carts.length === 0) {
@@ -62,7 +62,7 @@ class CartManager {
 
     // Valida si el id del productro pasado por parametro esta en el cart cuyo id se paso por parametro. Devuelve true si los esta, y false si no
     async isProductOnCart(cid, pid) {
-        const [cart] = await this.getCartById(cid);
+        const [cart] = await this.getBy(cid);
         const cartPids = [];
         cart.products.forEach(e => {
             cartPids.push(e.pid);
@@ -79,9 +79,9 @@ class CartManager {
     }
 
     // Agrega al carrito cuyo id se paso por parametro, el id y la cantidad del producto pasados por parametro. Retorna el producto agregado
-    async addProdToCart(cid, pid, quantity) {
+    async addItem(cid, pid, quantity) {
         try {
-            const [cart, carts] = await this.getCartById(cid);
+            const [cart, carts] = await this.getBy(cid);
             const productManager = new ProductManager();
             const [product] = await productManager.getProductById(pid);
         
@@ -113,10 +113,10 @@ class CartManager {
 // const cartManager = new CartManager();
 
 // async function test() {
-//     console.log(await cartManager.getCarts());
-// //     // console.log(await cartManager.addCarts([]));
-// //     // const [cart] = await cartManager.getCartById(5);
-// //     await cartManager.addProdToCart(3, 7, 1);
+//     console.log(await cartManager.get());
+// //     // console.log(await cartManager.create([]));
+// //     // const [cart] = await cartManager.getBy(5);
+// //     await cartManager.addItem(3, 7, 1);
 // }
 
 // await test();

@@ -1,8 +1,30 @@
-import { connect } from 'mongoose';
+import { MongoSingleton } from "../utils/mongoSingleton.js";
+import dotenv from 'dotenv';
+import { Command } from "commander";
 
-const connectDB = async () => {
-    console.log('Connected to Database');
-    await connect('mongodb+srv://goricarhue2015:baseecommerce123@cluster0.ft6cz.mongodb.net/aberasturi-agro');
-}
+// Configuracion de commander
+const program = new Command();
 
-export default connectDB;
+program.option('--mode <mode>', 'Modo de ejecucion', 'development');
+program.parse();
+
+const { mode } = program.opts();
+
+dotenv.config({
+    path: mode === 'development' ? './.env.development' : './.env.production'
+});
+
+// Objeto de configuracion
+const config = {
+    port: process.env.PORT || 8080,
+    private_key: process.env.PRIVATE_KEY,
+    persistence: process.env.PERSISTENCE
+};
+
+
+const connectDb = async () => {
+    console.log(`Connecting to Database in ${mode} mode`);
+    await MongoSingleton.getInstance();
+};
+
+export { config, connectDb };

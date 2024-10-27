@@ -8,26 +8,25 @@ import appRouter from './routes/index.js'
 import socketProducts from './listeners/socketProducts.js';
 
 import { Server } from 'socket.io';
-import connectDB from './config/index.js';
 
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
 import { initializePassport } from './config/passport.config.js'
+import { config } from './config/index.js';
 
 // Config. de server
 const app = express();
-const PORT = process.env.PORT || 8080;
 
 
 // Config. de websocket
-const httpServer = app.listen(PORT, () => {
-    console.log(`Servidor en puerto ${PORT}`);
-    console.log(`http://localhost:${PORT}/login`);
+const httpServer = app.listen(config.port, () => {
+    console.log(`Server running on port ${config.port}`);
+    console.log(`http://localhost:${config.port}/login`);
 });
-const io = new Server(httpServer);
 
 
 // Middleware para uso del socket en toda la app
+const io = new Server(httpServer);
 const ioMiddleware = (io) => (req, res, next) => {
     req.io = io;
     next();
@@ -37,7 +36,7 @@ app.use(ioMiddleware(io));
 
 // Parsear JSON y data URL-encoded
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 
 // Middleware para configurar la carpeta static
@@ -51,13 +50,10 @@ app.use(passport.initialize());
 initializePassport();
 
 
-connectDB();
-
-
 // Configuracion del motor de plantillas
 app.engine('handlebars', handlebars.engine());
 // Configuracion de carpeta donde debe tomar las plantillas
-app.set('views', path.join(rootDir, 'src','views'));
+app.set('views', path.join(rootDir, 'src', 'views'));
 // Configurar la extension de las plantillas
 app.set('view engine', 'handlebars');
 

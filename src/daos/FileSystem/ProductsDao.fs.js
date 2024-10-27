@@ -8,7 +8,7 @@ class ProductManager {
     }
 
     // Devuelve todos los productos
-    async getProducts() {
+    async get() {
         try {
             const result = await fs.promises.readFile(this.path, 'utf-8');
             return JSON.parse(result);
@@ -19,9 +19,9 @@ class ProductManager {
     }
 
     // Devuelve el un array que en el index 0 contiene el producto con el id pasado por parametro, y en el index 1 la lista de productos
-    async getProductById(id) {
+    async getBy(id) {
         try {
-            const products = await this.getProducts();
+            const products = await this.get();
             const product = products.find(prod => prod.id == id);
 
             if (product) {
@@ -65,9 +65,9 @@ class ProductManager {
     }
 
     // Agrega el producto pasado por parametro en formato de objeto
-    async addProducts(product) {
+    async create(product) {
         try {
-            const products = await this.getProducts();
+            const products = await this.get();
 
             if(products.length === 0) {
                 product.id = 1;
@@ -89,9 +89,9 @@ class ProductManager {
     }
 
     // Actualiza los campos pasados por parametro del producto cuyo id se paso por parametro
-    async updateProduct(id, fields) {
+    async update(id, fields) {
         try {
-            const [product, products] = await this.getProductById(id);
+            const [product, products] = await this.getBy(id);
             const numId = Number(id);
             
             if (product) {
@@ -124,9 +124,9 @@ class ProductManager {
     }
 
     // Elimina el producto cuyo id se paso por parametro
-    async deleteProduct(id) {
+    async delete(id) {
         try {
-            const products = await this.getProducts();
+            const products = await this.get();
             const index = products.findIndex(prod => prod.id == id);
             
             if (index == -1) {
@@ -158,7 +158,7 @@ class ProductManager {
 // const pM = new ProductManager;
 
 // async function test() {
-//     console.log(await pM.getProductById(4));
+//     console.log(await pM.getBy(4));
 // }
 
 // await test();

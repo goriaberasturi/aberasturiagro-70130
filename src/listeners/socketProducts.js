@@ -1,27 +1,27 @@
-import ProductsManagerMongo from "../daos/MongoDb/products.manager.mongo.js";
-import CartsManagerMongo from "../daos/MongoDb/carts.manager.mongo.js";
+import ProductsDaoMongo from "../daos/MongoDb/productsDao.mongo.js";
+import CartsManagerMongo from "../daos/MongoDb/cartsDao.mongo.js";
 // const pm = new ProductManager();
-const pS = new ProductsManagerMongo;
-const cS = new CartsManagerMongo;
+const productService = new ProductsDaoMongo();
+const cartService = new CartsManagerMongo;
 
 const socketProducts = (socketServer) => {
     socketServer.on('connection', async socket => {
         console.log(`Nuevo cliente conectado: ${socket.id}`);
 
         // Product events
-        const docs = await pS.getProducts();
+        const docs = await productService.get();
         socketServer.emit('productLoad', docs);
 
         socket.on('addProduct', async (prod) => {
-            await pS.createProduct(prod);
-            const docs = await pS.getProducts();
+            await productService.create(prod);
+            const docs = await productService.get();
 
             socketServer.emit('productLoad', docs);
         });
 
         socket.on('deleteProduct', async (prodId) => {
-            await pS.deleteProduct(prodId);
-            const docs = await pS.getProducts();
+            await productService.delete(prodId);
+            const docs = await productService.get();
 
             socketServer.emit('productLoad', docs);
         });
@@ -30,13 +30,13 @@ const socketProducts = (socketServer) => {
         // Cart events
         socket.on('addToCart', async prod => {
             const cid = '66ceacd2146f2c5d2730defd';
-            const product = await pS.getProduct({_id: prod.product});
+            const product = await productService.getBy({_id: prod.product});
 
             let response;
-            if(await cS.isProductOnCart(cid, prod.product)) {
-                response = await cS.updateProductOnCart(cid, prod.product, {quantity: prod.quantity});
+            if(await cartService.isProductOnCart(cid, prod.product)) {
+                response = await cartService.updateItem(cid, prod.product, {quantity: prod.quantity});
             } else {
-                response = await cS.addProductToCart(cid, prod);
+                response = await cartService.addItem(cid, prod);
             };
 
             if(response) socketServer.emit('addedProductToCart', `Producto agregado al carrito:\n- Producto: ${product.title}\n- Cantidad: ${prod.quantity}`);
@@ -44,20 +44,20 @@ const socketProducts = (socketServer) => {
 
         socket.on('deleteFromCart', async pid => {
             const cid = '66ceacd2146f2c5d2730defd';
-            const product = await pS.getProduct({_id: pid});
-            const response = await cS.deleteProductOnCart(cid, pid);
+            const product = await productService.getBy({_id: pid});
+            const response = await cartService.deleteItem(cid, pid);
             
             if(response) socketServer.emit('deletedFromCart', {message: `Eliminaste "${product.title}" del carrito`, pid});
         });
         
         socket.on('incCartQuanity', async pid => {
             const cid = '66ceacd2146f2c5d2730defd';
-            await cS.updateProductOnCart(cid, pid, {quantity: 1});
+            await cartService.updateItem(cid, pid, {quantity: 1});
         })
         
         socket.on('decCartQuanity', async pid => {
             const cid = '66ceacd2146f2c5d2730defd';
-            await cS.updateProductOnCart(cid, pid, {quantity: -1});
+            await cartService.updateItem(cid, pid, {quantity: -1});
         })
     });
 };

@@ -7,7 +7,7 @@
     "start": "nodemon src/app.js",
     "server": "node --watch src/app.js",
     "sass": "sass --watch public/assets/css/main.scss:public/assets/css/main.css",
-    "dev": "concurrently \"npm run start\" \"npm run sass\""
+    "dev": "concurrently \"nodemon src/app.js --mode development\" \"npm run sass\""
   },
   "type": "module",
   "keywords": [],
@@ -15,7 +15,10 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "commander": "^12.1.0",
     "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-handlebars": "^6.0.7",
     "jsonwebtoken": "^9.0.2",
