@@ -4,7 +4,7 @@ import { generateToken } from './../utils/jsonwebtoken.js';
 
 class SessionsController {
     constructor() {
-        this.userService = userService;
+        this.usService = userService;
     }
 
     login = async (req, res) => {
@@ -12,7 +12,7 @@ class SessionsController {
             const { email, password } = req.body;
             if (!email || !password) return res.status(400).send({ status: 'error', error: 'Ingrese email y contraseña' });
     
-            const userFound = await this.userService.getBy({ email });
+            const userFound = await this.usService.getUser({ email });
             if (!userFound) return res.send({ status: 'error', error: 'El usuario no se encuentra registrado' });
     
             if (userFound.email !== email || !isValidPassword(password, userFound.password)) {
@@ -31,8 +31,12 @@ class SessionsController {
         }
     };
 
-    current = (req, res) => {
-        res.send({userData: req.user});
+    current = async (req, res) => {
+        try {
+            res.send({userData: req.user});
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 

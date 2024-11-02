@@ -27,4 +27,4 @@ switch (config.persistence) {
         break;
 }
 
-export default { ProductsDao, CartsDao, UsersDao };
+export { ProductsDao, CartsDao, UsersDao };

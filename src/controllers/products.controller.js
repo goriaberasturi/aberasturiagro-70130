@@ -2,7 +2,7 @@ import { productService } from './../services/index.js';
 
 class ProductsController {
     constructor() {
-        this.productService = productService;
+        this.service = productService;
     }
 
     getProducts = async (req, res) => {
@@ -23,7 +23,7 @@ class ProductsController {
                 page,
                 hasPrevPage,
                 hasNextPage
-            } = await this.productService.search(filter, search);
+            } = await this.service.searchProducts(filter, search);
 
             // Base de prevLink y nextLink
             let prevLink = `http://localhost:8080/api/products?pageNum=${page - 1}`;
@@ -62,9 +62,9 @@ class ProductsController {
     getProduct = async (req, res) => {
         try {
             const { pid } = req.params;
-            if (!await this.productService.isValidId(pid)) return res.status(400).send({ status: 'error', message: 'Id invalido' });
+            if (!await this.service.isValidId(pid)) return res.status(400).send({ status: 'error', message: 'Id invalido' });
 
-            const product = await this.productService.getBy({ _id: pid });
+            const product = await this.service.getProduct({ _id: pid });
             if (!product) return res.status(404).send({ status: 'error', message: 'No se hallo un producto con este id' });
 
             return res.status(200).send({ status: 'success', payload: product });
@@ -78,10 +78,10 @@ class ProductsController {
     createProduct = async (req, res) => {
         try {
             const { body } = req;
-            if (!await this.productService.isFieldValid(body)) return res.status(400).send({ status: 'error', message: 'Hay campos sin completar' });
-            if (await this.productService.getBy({ code: body.code })) return res.status(409).send({ status: 'error', message: 'Este codigo ya se encuentra registrado' });
+            if (!await this.service.isFieldValid(body)) return res.status(400).send({ status: 'error', message: 'Hay campos sin completar' });
+            if (await this.service.getProduct({ code: body.code })) return res.status(409).send({ status: 'error', message: 'Este codigo ya se encuentra registrado' });
 
-            const response = await this.productService.createProduct(body);
+            const response = await this.service.createProduct(body);
 
             return res.status(200).send({ status: 'success', payload: response });
 
@@ -94,14 +94,14 @@ class ProductsController {
         try {
             const {body} = req;
             const {pid} = req.params;
-            if(!await this.productService.isValidId(pid)) return res.status(400).send({status: 'error', message: 'Id invalido'});
-            if(!await this.productService.isFieldValid(body)) return res.status(400).send({status: 'error', message: 'Hay campos sin completar'});
-            const foundCode = await this.productService.getBy({code: body.code});
+            if(!await this.service.isValidId(pid)) return res.status(400).send({status: 'error', message: 'Id invalido'});
+            if(!await this.service.isFieldValid(body)) return res.status(400).send({status: 'error', message: 'Hay campos sin completar'});
+            const foundCode = await this.service.getProduct({code: body.code});
             if(foundCode) {
                 if(foundCode._id.toString() != pid) return res.status(409).send({status: 'error', message: 'Este codigo ya se encuentra registrado'});
             }
             
-            const response = await this.productService.update(pid, body);
+            const response = await this.service.updateProduct(pid, body);
             
             return res.status(200).send({status: 'success', payload: response});
             
@@ -113,9 +113,9 @@ class ProductsController {
     deleteProduct = async (req, res) => {
         try {
             const {pid} = req.params;
-            if(!await this.productService.isValidId(pid)) return res.status(400).send({status: 'error', message: 'Id invalido'});
+            if(!await this.service.isValidId(pid)) return res.status(400).send({status: 'error', message: 'Id invalido'});
             
-            const response = await this.productService.delete(pid);
+            const response = await this.service.deleteProduct(pid);
             if(!response) return res.status(404).send({status: 'error', message: 'No se hallo un producto con este id'});
     
             return res.status(200).send({status: 'success', payload: response});

@@ -2,13 +2,13 @@ import { productService, cartService } from './../services/index.js';
 
 class CartsController {
     constructor() {
-        this.productService = productService;
-        this.cartService = cartService;
+        this.pService = productService;
+        this.cService = cartService;
     }
 
     getCarts = async (req, res) => {
         try {
-            const carts = await this.cartService.get();
+            const carts = await this.cService.getCarts();
     
             return res.status(200).send({status: 'success', payload: carts});
             
@@ -21,15 +21,15 @@ class CartsController {
         try {
             const {body} = req;
             const {cid} = req.params;
-            if(!await this.cartService.isValidId(cid)) return res.status(400).send({status: 'error', message: 'El Id del carrito no tiene un formato valido'});
+            if(!await this.cService.isValidId(cid)) return res.status(400).send({status: 'error', message: 'El Id del carrito no tiene un formato valido'});
     
-            const cart = await this.cartService.getBy({_id: cid});
+            const cart = await this.cService.getCart({_id: cid});
     
             if(!cart) return res.status(404).send({status: 'error', message: 'No se encontro un carrito con este id'});
-            if(!await this.productService.isValidId(body.product)) return res.status(400).send({status: 'error', message: 'El Id del producto no tiene un formato valido'});
+            if(!await this.pService.isValidId(body.product)) return res.status(400).send({status: 'error', message: 'El Id del producto no tiene un formato valido'});
             if(body.quantity <= 0) return res.status(400).send({status: 'error', message: 'La cantidad agregada debe ser mayor que 0'});
     
-            const addedProduct = await this.cartService.addItem(cid, body);
+            const addedProduct = await this.cService.addProduct(cid, body);
             
             return res.status(200).send({status: 'success', payload: addedProduct});
             
@@ -45,15 +45,15 @@ class CartsController {
     
             body = {quantity: Number(body.quantity)};
             const {cid, pid} = req.params;
-            if(!await this.cartService.isValidId(cid)) return res.status(400).send({status: 'error', message: 'El Id del carrito no tiene un formato valido'});
-            if(!await this.cartService.isValidId(pid)) return res.status(400).send({status: 'error', message: 'El Id del producto no tiene un formato valido'});
+            if(!await this.cService.isValidId(cid)) return res.status(400).send({status: 'error', message: 'El Id del carrito no tiene un formato valido'});
+            if(!await this.cService.isValidId(pid)) return res.status(400).send({status: 'error', message: 'El Id del producto no tiene un formato valido'});
     
-            const cart = await this.cartService.getBy({_id: cid});
+            const cart = await this.cService.getCart({_id: cid});
     
             if(!cart) return res.status(404).send({status: 'error', message: 'No se encontro un carrito con este id'});
-            if(!await this.cartService.isProductOnCart(cid, pid)) return res.status(404).send({status: 'error', message: 'No se encontro un producto con este id en el carrito'});
+            if(!await this.cService.isProductOnCart(cid, pid)) return res.status(404).send({status: 'error', message: 'No se encontro un producto con este id en el carrito'});
             
-            const addedProduct = await this.cartService.updateItem(cid, pid, body);
+            const addedProduct = await this.cService.updateProduct(cid, pid, body);
             
             return res.status(200).send({status: 'success', payload: addedProduct});
             
@@ -65,13 +65,13 @@ class CartsController {
     emptyCart = async (req, res) => {
         try {
             const {cid} = req.params;
-            if(!await this.cartService.isValidId(cid)) return res.status(400).send({status: 'error', message: 'El Id del carrito no tiene un formato valido'});
+            if(!await this.cService.isValidId(cid)) return res.status(400).send({status: 'error', message: 'El Id del carrito no tiene un formato valido'});
     
-            const cart = await this.cartService.getBy({_id: cid});
+            const cart = await this.cService.getCart({_id: cid});
             
             if(!cart) return res.status(404).send({status: 'error', message: 'No se encontro un carrito con este id'});
             
-            const deletedCart = await this.cartService.deleteAllItems(cid);
+            const deletedCart = await this.cService.deleteAllProducts(cid);
             
             return res.status(200).send({status: 'success', payload: deletedCart});
             
@@ -83,14 +83,14 @@ class CartsController {
     deleteFromCart = async (req, res) => {
         try {
             const {cid, pid} = req.params;
-            if(!await this.cartService.isValidId(cid)) return res.status(400).send({status: 'error', message: 'El Id del carrito no tiene un formato valido'});
-            const cart = await this.cartService.getBy({_id: cid});
+            if(!await this.cService.isValidId(cid)) return res.status(400).send({status: 'error', message: 'El Id del carrito no tiene un formato valido'});
+            const cart = await this.cService.getCart({_id: cid});
             
-            if(!await this.cartService.isValidId(pid)) return res.status(400).send({status: 'error', message: 'El Id del producto no tiene un formato valido'});
+            if(!await this.cService.isValidId(pid)) return res.status(400).send({status: 'error', message: 'El Id del producto no tiene un formato valido'});
             if(!cart) return res.status(404).send({status: 'error', message: 'No se encontro un carrito con este id'});
-            if(!await this.cartService.isProductOnCart(cid, pid)) return res.status(404).send({status: 'error', message: 'No se encontro un producto con este Id en el carrito indicado'});
+            if(!await this.cService.isProductOnCart(cid, pid)) return res.status(404).send({status: 'error', message: 'No se encontro un producto con este Id en el carrito indicado'});
             
-            const addedProduct = await this.cartService.deleteItem(cid, pid);
+            const addedProduct = await this.cService.deleteProduct(cid, pid);
     
             return res.status(200).send({status: 'success', payload: addedProduct});
     

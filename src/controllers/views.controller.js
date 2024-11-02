@@ -2,8 +2,8 @@ import { productService, cartService } from "./../services/index.js";
 
 class ViewsControllers {
     constructor() {
-        this.productService = productService;
-        this.cartService = cartService;
+        this.pService = productService;
+        this.cService = cartService;
     }
 
     home = async (req, res) => {
@@ -11,7 +11,7 @@ class ViewsControllers {
             res.render('home', {
                 isMenu: true,
                 prodLink: 'active',
-                products: await this.productService.get()
+                products: await this.pService.getProducts()
             });
         } catch (error) {
             console.log(error);
@@ -35,7 +35,7 @@ class ViewsControllers {
                 page,
                 hasPrevPage,
                 hasNextPage
-            } = await this.productService.search(filter, search);
+            } = await this.pService.searchProducts(filter, search);
 
             // Base de prevLink y nextLink
             let prevLink = `http://localhost:8080/products?pageNum=${page - 1}`;
@@ -74,7 +74,7 @@ class ViewsControllers {
 
     realTimeProducts = async (req, res) => {
         try {
-            const { docs } = await this.productService.search({}, {});
+            const { docs } = await this.pService.searchProducts({}, {});
             res.render('realTimeProducts', {
                 isMenu: true,
                 isCart: true,
@@ -89,8 +89,8 @@ class ViewsControllers {
     cart = async (req, res) => {
         try {
             const { cid } = req.params
-            const cart = await this.cartService.getBy({ _id: cid });
-    
+            const cart = await this.cService.getCart({ _id: cid });
+
             res.render('cart', {
                 isMenu: true,
                 isCart: false,
