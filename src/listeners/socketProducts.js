@@ -12,8 +12,7 @@ const socketProducts = (socketServer) => {
         const docs = await productService.get();
         socketServer.emit('productLoad', docs);
 
-        socket.on('addProduct', async (prod) => {
-            await productService.create(prod);
+        socket.on('addProduct', async () => {
             const docs = await productService.get();
 
             socketServer.emit('productLoad', docs);

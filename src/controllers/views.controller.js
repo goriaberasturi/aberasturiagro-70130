@@ -11,7 +11,8 @@ class ViewsControllers {
             res.render('home', {
                 isMenu: true,
                 prodLink: 'active',
-                products: await this.pService.getProducts()
+                products: await this.pService.getProducts(),
+                cart: req.user.cart
             });
         } catch (error) {
             console.log(error);
@@ -54,11 +55,18 @@ class ViewsControllers {
             hasPrevPage ? 'holis :3' : prevLink = null;
             hasNextPage ? 'holis :3' : nextLink = null;
 
+            const isCart = req.user ? true : false;
+            const cart = isCart ? req.user.cart : null;
+            const isUser = isCart ? req.user.role == 'user' : null;
+
             res.render('home', {
+                docTitle: 'Home | Productos',
                 isMenu: true,
-                isCart: true,
+                isCart,
+                isUser,
                 prodLink: 'active',
                 products: docs,
+                cart,
                 prevPage,
                 nextPage,
                 page,
@@ -76,15 +84,36 @@ class ViewsControllers {
         try {
             const { docs } = await this.pService.searchProducts({}, {});
             res.render('realTimeProducts', {
+                docTitle: 'Productos | ABM',
                 isMenu: true,
-                isCart: true,
                 rtpLink: 'active',
-                products: docs
+                products: docs,
+                cart: req.user.cart
             });
         } catch (error) {
             console.log(error);
         }
     };
+
+    editProducts = async (req, res) => {
+        try {
+            const { pid } = req.params;
+            const { docs } = await this.pService.searchProducts({_id: pid}, {});
+            const product = docs[0];
+            let isActive = product.status;
+            isActive ? isActive = 'checked' : isActive = null;
+
+            res.render('editProducts', {
+                docTitle: 'Productos | Modificacion',
+                isMenu: true,
+                rtpLink: 'active',
+                product,
+                isActive
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     cart = async (req, res) => {
         try {
@@ -92,6 +121,7 @@ class ViewsControllers {
             const cart = await this.cService.getCart({ _id: cid });
 
             res.render('cart', {
+                docTitle: 'Carrito',
                 isMenu: true,
                 isCart: false,
                 cartLink: 'active',
@@ -105,6 +135,7 @@ class ViewsControllers {
     login = async (req, res) => {
         try {
             res.render('login', {
+                docTitle: 'Login',
                 isMenu: true,
                 isCart: false
             });
@@ -116,6 +147,7 @@ class ViewsControllers {
     register = async (req, res) => {
         try {
             res.render('register', {
+                docTitle: 'Registrarse',
                 isMenu: true,
                 isCart: false
             });

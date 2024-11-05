@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/assets/css/main.css">
-    <title>Document</title>
+    <title>{{docTitle}}</title>
 </head>
 
 <body>
@@ -20,8 +20,8 @@
                 <a class="nav-link {{prodLink}}" href="/products">Productos</a>
                 <a class="nav-link {{rtpLink}}" href="/realTimeProducts">En tiempo real</a>
             </div>
-            {{#if isCart}}
-            <a class="cart-logo {{cartLink}}" href="/cart/66ceacd2146f2c5d2730defd"><img src="../../../static/assets/img/carrito-de-compras.png" alt=""></a>
+            {{#if isUser}}
+            <a id="{{cart}}" class="cart-logo {{cartLink}}" href="/cart/{{cart}}"><img src="../../../static/assets/img/carrito-de-compras.png" alt=""></a>
             {{/if}}
         </div>
     </nav>

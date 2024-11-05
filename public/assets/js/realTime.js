@@ -7,7 +7,7 @@ function updateProductList(lista) {
     let productosHTML = '';
 
     lista.forEach(prod => {
-        productosHTML += `<div class="productCard">
+        productosHTML += `<div id="${prod._id.toString()}" class="productCard">
         <div class="imgContainer">
             <img src="${prod.thumbnails || ''}" alt="${prod.title}">
         </div>
@@ -19,49 +19,90 @@ function updateProductList(lista) {
                 <li><span>category:</span> ${prod.category}</li>
                 <li><span>stock:</span> ${prod.stock}</li>
                 </ul>
-            <button id="${prod._id.toString()}" class="deleteBtn">Eliminar</button>
+                <div class="crudBtnsContainer">
+                    <button class="updateBtn">Modificar</button>
+                    <button class="deleteBtn">Eliminar</button>
+                </div>
         </div>`;
     });
 
     prodList.innerHTML = productosHTML;
     
-    const deleteBtns = document.querySelectorAll('.deleteBtn');    
-    deleteBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            deleteProduct(btn.getAttribute('id'));
+    const pCards = document.querySelectorAll('.productCard');
+    pCards.forEach(card => {
+        const pid = card.getAttribute('id');
+        const deleteBtn = card.querySelector('.deleteBtn');
+        const updateBtn = card.querySelector('.updateBtn');
+
+        deleteBtn.addEventListener('click', () => {
+            if(confirm('Esta seguro que desea eliminar el producto?')) deleteProduct(deleteBtn, pid);
+        });
+
+        updateBtn.addEventListener('click', () => {
+            window.location.href = `/realTimeProducts/${pid}`
         });
     });
 }
 
 // Funcion para eliminar un producot con socket
-function deleteProduct(id) {
-    socketClient.emit('deleteProduct', id);
+async function deleteProduct(btn, pid) {
+    try {
+        const response = await fetch(`/api/products/${pid}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        });
+
+        if (response.ok) {
+            btn.parentElement.parentElement.style.display = 'none';
+        } else {
+            alert('Hubo un error al agregar el producto al carrito');
+        }
+
+    } catch (error) {
+        console.log(error);
+        alert('Hubo un error inesperado!');
+    }
 }
 
 
 let form = document.querySelector("#formProduct");
-form.addEventListener('submit', (evt) => {
+form.addEventListener('submit', async (evt) => {
     evt.preventDefault();
 
-    let title = form.elements.title.value;
-    let description = form.elements.description.value;
-    let price = form.elements.price.value;
-    let thumbnails = form.elements.imgUrl.value;
-    let code = form.elements.code.value;
-    let category = form.elements.category.value;
-    let stock = form.elements.stock.value;
-    let status = form.elements.status.checked;
+    const newProduct = {
+        title: form.elements.title.value,
+        description: form.elements.description.value,
+        price: form.elements.price.value,
+        thumbnails: form.elements.thumbnails.value,
+        code: form.elements.code.value,
+        category: form.elements.category.value,
+        stock: form.elements.stock.value,
+        status: form.elements.status.checked,
+    }
 
-    socketClient.emit('addProduct', {
-        title,
-        description,
-        price,
-        thumbnails,
-        code,
-        category,
-        stock,
-        status
-    });
+    try {
+        const response = await fetch(`/api/products`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify(newProduct)
+        });
+
+        if (response.ok) {
+            socketClient.emit('addProduct');
+        } else {
+            alert('Hubo un error al agregar el producto al carrito');
+        }
+
+    } catch (error) {
+        console.log(error);
+        alert('Hubo un error inesperado!');
+    }
 
     form.reset();
 });

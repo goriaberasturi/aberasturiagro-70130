@@ -25,6 +25,7 @@
                 <li><span>category:</span> {{category}}</li>
                 <li><span>stock:</span> {{stock}}</li>
             </ul>
+            {{#if ../isUser}}
             <div id="{{_id}}" class="ctrlsContainer">
                 <div class="cartCounter">
                     <span class="minus">-</span>
@@ -33,6 +34,7 @@
                 </div>
                 <button class="addBtn">Agregar</button>
             </div>
+            {{/if}}
         </div>
         {{/each}}
     </article>

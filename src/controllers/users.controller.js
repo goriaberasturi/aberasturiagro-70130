@@ -1,5 +1,6 @@
 import { userService, cartService } from './../services/index.js';
 import { createHash } from './../utils/bcrypt.js';
+import { SessionsController } from './sessions.controller.js';
 
 class UsersController {
     constructor() {
@@ -46,7 +47,7 @@ class UsersController {
             }
             const result = await this.uService.createUser(newUser);
 
-            res.redirect('/products');
+            await SessionsController.injectToken({id: result._id, cart: result.cart, role: result.role}, res);
         } catch (error) {
             console.log(error);
         }
