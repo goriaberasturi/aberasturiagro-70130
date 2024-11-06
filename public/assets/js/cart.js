@@ -1,4 +1,14 @@
 const socketClient = io();
+const cartCards = document.querySelectorAll('.productCard');
+
+const updateAmount = pid => {
+    const card = document.getElementById(pid);
+    const amountContainer = card.querySelector('.cartAmount');
+    const price = Number(card.querySelector('.price-info').textContent.substring(7));
+    const quatity = Number(card.querySelector('.num').textContent);
+    
+    amountContainer.innerHTML = `$ ${price * quatity}`;
+};
 
 const setCounterFunction = (method, btn, num, pid, stock) => {
     btn.addEventListener('click', async () => {
@@ -33,6 +43,7 @@ const setCounterFunction = (method, btn, num, pid, stock) => {
     
                 if (response.ok) {
                     const data = await response.json();
+                    updateAmount(pid);
                 } else {
                     alert('Hubo un error al agregar el producto al carrito');
                 }
@@ -71,7 +82,13 @@ const setDeleteFunction = (btn, pid) => {
     });
 }
 
-const cartCards = document.querySelectorAll('.productCard');
+document.addEventListener('DOMContentLoaded', e => {
+    cartCards.forEach(card => {
+        const pid = card.getAttribute('id');
+        updateAmount(pid);
+    });
+});
+
 cartCards.forEach(card => {
     const pid = card.getAttribute('id');
     const counter = card.querySelector('.ctrlsContainer');

@@ -592,6 +592,14 @@ body {
   border-left: 1px solid #7da86b;
   pointer-events: none;
 }
+#cart .cart-container .cartList .productCard .ctrlsContainer .cartAmount {
+  width: 70%;
+  height: 2.2em;
+  text-align: center;
+  line-height: 2.2em;
+  font-size: 1em;
+  font-weight: 500;
+}
 #cart .cart-container .cartList .productCard .ctrlsContainer .deleteBtn {
   width: 70%;
   height: 2.2em;

@@ -10,17 +10,18 @@
                 <div class="infoContainer">
                     <h2>{{product.title}}</h2>
                     <ul>
-                        <li><span>price:</span> {{product.price}}</li>
+                        <li class="price-info"><span>price:</span> {{product.price}}</li>
                         <li><span>category:</span> {{product.category}}</li>
                         <li class="stock-info"><span>stock:</span> {{product.stock}}</li>
                     </ul>
                 </div>
-                <div id="{{product._id}}" class="ctrlsContainer">
+                <div class="ctrlsContainer">
                     <div class="cartCounter">
                         <span class="minus">-</span>
                         <span class="num">{{quantity}}</span>
                         <span class="plus">+</span>
                     </div>
+                    <div class="cartAmount"></div>
                     <buton class="deleteBtn">Eliminar</buton>
                 </div>
             </div>

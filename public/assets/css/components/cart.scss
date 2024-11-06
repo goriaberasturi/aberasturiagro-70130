@@ -96,6 +96,15 @@
                         }
                     }
 
+                    .cartAmount {
+                        width: 70%;
+                        height: 2.2em;
+                        text-align: center;
+                        line-height: 2.2em; //Centra verticalmente el texto (tiene que ser igual al height)
+                        font-size: 1em;
+                        font-weight: 500;
+                    }
+
                     .deleteBtn {
                         width: 70%;
                         height: 2.2em;
