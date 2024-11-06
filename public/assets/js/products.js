@@ -1,12 +1,13 @@
 const socketClient = io();
 
-const ctrlsContainers = document.querySelectorAll('.ctrlsContainer');
-
-const setAddFunction = (btn, num) => {
+const setAddFunction = (btn, num, stock) => {
     btn.addEventListener('click', () => {
         let count = Number(num.innerHTML);
-        count++;
-        num.innerHTML = count;
+
+        if(count < stock) {
+            count++;
+            num.innerHTML = count;
+        };
     });
 };
 
@@ -39,7 +40,7 @@ const setAddToCartFunction = async (btn, pid, qty) => {
                 body: JSON.stringify(newProduct)
             });
 
-            if(response.ok) {
+            if (response.ok) {
                 alert(`Se agregaron ${newProduct.quantity} unidades!`);
             } else {
                 alert('Hubo un error al agregar el producto al carrito');
@@ -57,15 +58,19 @@ const setAddToCartFunction = async (btn, pid, qty) => {
     });
 }
 
-ctrlsContainers.forEach(ctr => {
-    const id = ctr.getAttribute('id');
+const productCards = document.querySelectorAll('.productCard');
+productCards.forEach(card => {
+    const id = card.getAttribute('id');
+    const ctrlsContainer = card.querySelector('.ctrlsContainer');
+    const liStock = card.querySelector('.stock-info').textContent.substring(7);
+    const stock = Number(liStock);
 
-    const plus = ctr.querySelector('.plus');
-    const num = ctr.querySelector('.num');
-    const minus = ctr.querySelector('.minus');
-    const addBtns = ctr.querySelector('.addBtn');
+    const plus = ctrlsContainer.querySelector('.plus');
+    const num = ctrlsContainer.querySelector('.num');
+    const minus = ctrlsContainer.querySelector('.minus');
+    const addBtns = ctrlsContainer.querySelector('.addBtn');
 
-    setAddFunction(plus, num);
+    setAddFunction(plus, num, stock);
     setSubstractFunction(minus, num);
     setAddToCartFunction(addBtns, id, num);
 });

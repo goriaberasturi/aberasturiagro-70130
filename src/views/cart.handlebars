@@ -3,7 +3,7 @@
     <div class="cart-container">
         <article class="cartList">
             {{#each products}}
-            <div class="productCard">
+            <div id="{{product._id}}" class="productCard">
                 <div class="imgContainer">
                     <img src="{{product.thumbnails}}" alt="{{product.title}}">
                 </div>
@@ -12,7 +12,7 @@
                     <ul>
                         <li><span>price:</span> {{product.price}}</li>
                         <li><span>category:</span> {{product.category}}</li>
-                        <li><span>stock:</span> {{product.stock}}</li>
+                        <li class="stock-info"><span>stock:</span> {{product.stock}}</li>
                     </ul>
                 </div>
                 <div id="{{product._id}}" class="ctrlsContainer">

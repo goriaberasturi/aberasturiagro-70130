@@ -1,47 +1,46 @@
 const socketClient = io();
 
-const counters = document.querySelectorAll('.ctrlsContainer');
-const info = document.querySelectorAll('.infoContainer');
-
-const setCounterFunction = (method, btn, num, pid) => {
+const setCounterFunction = (method, btn, num, pid, stock) => {
     btn.addEventListener('click', async () => {
         let count = Number(num.innerHTML);
-        let qty;
+        let qty = null;
+
         if (method == 'add') {
-            qty = { quantity: 1 };
-            count++;
-            num.innerHTML = count;
-        };
-        if (method == 'substract') {
+            if(count < stock) {
+                qty = { quantity: 1 };
+                count++;
+                num.innerHTML = count;
+            }
+        } else if (method == 'substract') {
             if(count > 1) {
                 qty = { quantity: -1 };
                 count--;
                 num.innerHTML = count;
-            } else {
-                qty = { quantity: 0 };
             }
         };
         // socketClient.emit('incCartQuanity', pid);
 
-        try {
-            const response = await fetch(`/api/carts/products/${pid}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-                body: JSON.stringify(qty)
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-            } else {
-                alert('Hubo un error al agregar el producto al carrito');
+        if(qty) {
+            try {
+                const response = await fetch(`/api/carts/products/${pid}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(qty)
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                } else {
+                    alert('Hubo un error al agregar el producto al carrito');
+                }
+    
+            } catch (error) {
+                console.log(error);
+                alert('Hubo un error inesperado!');
             }
-
-        } catch (error) {
-            console.log(error);
-            alert('Hubo un error inesperado!');
         }
     });
 };
@@ -72,14 +71,21 @@ const setDeleteFunction = (btn, pid) => {
     });
 }
 
-counters.forEach(ctr => {
-    const pid = ctr.getAttribute('id');
-    const plus = ctr.querySelector('.plus');
-    const num = ctr.querySelector('.num');
-    const minus = ctr.querySelector('.minus');
-    const deleteBtn = ctr.querySelector('.deleteBtn');
+const cartCards = document.querySelectorAll('.productCard');
+cartCards.forEach(card => {
+    const pid = card.getAttribute('id');
+    const counter = card.querySelector('.ctrlsContainer');
+    const liStock = card.querySelector('.stock-info').textContent.substring(7);
+    const stock = Number(liStock);
 
-    setCounterFunction('add', plus, num, pid);
-    setCounterFunction('substract', minus, num, pid);
+    const plus = counter.querySelector('.plus');
+    const num = counter.querySelector('.num');
+    const minus = counter.querySelector('.minus');
+    const deleteBtn = counter.querySelector('.deleteBtn');
+    
+    setCounterFunction('add', plus, num, pid, stock);
+    setCounterFunction('substract', minus, num, pid, stock);
     setDeleteFunction(deleteBtn, pid);
 });
+
+

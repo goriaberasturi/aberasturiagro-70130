@@ -13,7 +13,7 @@
     </div>
     <article class="prodList">
         {{#each products}}
-        <div class="productCard">
+        <div id="{{_id}}" class="productCard">
             <div class="imgContainer">
                 <img src="{{thumbnails}}" alt="{{title}}">
             </div>
@@ -23,10 +23,10 @@
                 <li><span>price:</span> {{price}}</li>
                 <li><span>code:</span> {{code}}</li>
                 <li><span>category:</span> {{category}}</li>
-                <li><span>stock:</span> {{stock}}</li>
+                <li class="stock-info"><span>stock:</span> {{stock}}</li>
             </ul>
             {{#if ../isUser}}
-            <div id="{{_id}}" class="ctrlsContainer">
+            <div class="ctrlsContainer">
                 <div class="cartCounter">
                     <span class="minus">-</span>
                     <span class="num">1</span>
