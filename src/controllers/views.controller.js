@@ -119,11 +119,13 @@ class ViewsControllers {
         try {
             const { cid } = req.params
             const cart = await this.cService.getCart({ _id: cid });
-
+            const isConfirm = cart.products.length != 0;
+            
             res.render('cart', {
                 docTitle: 'Carrito',
                 isMenu: true,
                 isCart: false,
+                isConfirm,
                 cartLink: 'active',
                 products: cart.products
             });

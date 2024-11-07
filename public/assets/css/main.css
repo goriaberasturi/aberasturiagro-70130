@@ -592,7 +592,7 @@ body {
   border-left: 1px solid #7da86b;
   pointer-events: none;
 }
-#cart .cart-container .cartList .productCard .ctrlsContainer .cartAmount {
+#cart .cart-container .cartList .productCard .ctrlsContainer p {
   width: 70%;
   height: 2.2em;
   text-align: center;
@@ -614,6 +614,55 @@ body {
 }
 #cart .cart-container .cartList .productCard .ctrlsContainer .deleteBtn:hover {
   border: 2px solid red;
+}
+#cart .cart-container .purchaseInfo {
+  margin: 0.5em;
+  height: 10.4em;
+  overflow: visible;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  justify-items: center;
+  align-items: center;
+  border-radius: 5px;
+  border: 3px solid #7da86b;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.35);
+}
+#cart .cart-container .purchaseInfo h2 {
+  width: 100%;
+  height: 100%;
+  font-weight: 300;
+  color: white;
+  background-color: #7da86b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#cart .cart-container .purchaseInfo p {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3em;
+}
+#cart .cart-container .purchaseInfo button {
+  width: 50%;
+  padding: 5px 0;
+  height: fit-content;
+  border: none;
+  border-radius: 3px;
+  background-color: #7da86b;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1em;
+  transition: background-color 0.05s ease-in-out;
+}
+#cart .cart-container .purchaseInfo button:hover {
+  cursor: pointer;
+}
+#cart .cart-container .purchaseInfo button:active {
+  background-color: #5a8049;
 }
 
 #login, #register {

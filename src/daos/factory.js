@@ -3,6 +3,7 @@ import { config, connectDb } from './../config/index.js';
 let ProductsDao;
 let CartsDao;
 let UsersDao;
+let TicketsDao;
 
 switch (config.persistence) {
     case 'MEMORY':
@@ -24,7 +25,9 @@ switch (config.persistence) {
         CartsDao = CartsDaoMongo;
         const UsersDaoMongo = (await import('./MongoDb/usersDao.mongo.js')).default;
         UsersDao = UsersDaoMongo;
+        const TicketsDaoMongo = (await import('./MongoDb/ticketsDao.mongo.js')).default;
+        TicketsDao = TicketsDaoMongo;
         break;
 }
 
-export { ProductsDao, CartsDao, UsersDao };
+export { ProductsDao, CartsDao, UsersDao, TicketsDao };

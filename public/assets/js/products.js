@@ -42,6 +42,7 @@ const setAddToCartFunction = async (btn, pid, qty) => {
 
             if (response.ok) {
                 alert(`Se agregaron ${newProduct.quantity} unidades!`);
+                qty.innerHTML = 1;
             } else {
                 alert('Hubo un error al agregar el producto al carrito');
             }
@@ -50,11 +51,6 @@ const setAddToCartFunction = async (btn, pid, qty) => {
             console.log(error);
             alert('Hubo un error inesperado!');
         }
-
-        // socketClient.emit('addToCart', newProduct);
-
-
-        qty.innerHTML = 1;
     });
 }
 
@@ -65,12 +61,14 @@ productCards.forEach(card => {
     const liStock = card.querySelector('.stock-info').textContent.substring(7);
     const stock = Number(liStock);
 
-    const plus = ctrlsContainer.querySelector('.plus');
-    const num = ctrlsContainer.querySelector('.num');
-    const minus = ctrlsContainer.querySelector('.minus');
-    const addBtns = ctrlsContainer.querySelector('.addBtn');
-
-    setAddFunction(plus, num, stock);
-    setSubstractFunction(minus, num);
-    setAddToCartFunction(addBtns, id, num);
+    if(ctrlsContainer) {
+        const plus = ctrlsContainer.querySelector('.plus');
+        const num = ctrlsContainer.querySelector('.num');
+        const minus = ctrlsContainer.querySelector('.minus');
+        const addBtns = ctrlsContainer.querySelector('.addBtn');
+        
+        setAddFunction(plus, num, stock);
+        setSubstractFunction(minus, num);
+        setAddToCartFunction(addBtns, id, num);
+    }
 });

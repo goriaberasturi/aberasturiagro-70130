@@ -17,7 +17,7 @@ const ticketSchema = new Schema({
     code: {
         type: String,
         unique: true,
-        default: generateCode(13)
+        default: () => generateCode(13)
     },
     purchase_datetime: {
         type: Date,

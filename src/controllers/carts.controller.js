@@ -105,6 +105,15 @@ class CartsController {
             console.log(error);
         }
     };
+
+    purchaseCart = async (req, res) => {
+        try {
+            const cid = req.user.cart;
+            res.send({status: 'success', payload: {code: cid}});
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 
 export { CartsController };

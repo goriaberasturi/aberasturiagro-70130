@@ -9,12 +9,13 @@ const {
     addProduct,
     updateOnCart,
     emptyCart,
-    deleteFromCart
+    deleteFromCart,
+    purchaseCart
 } = new CartsController();
 
 router.get('/', adminAutho, getCarts);
 router.post('/', passportCall('jwt'), userAutho, addProduct);
-router.post('/purchase', passportCall('jwt'), userAutho, addProduct);
+router.post('/purchase', passportCall('jwt'), userAutho, purchaseCart);
 router.put('/products/:pid', passportCall('jwt'), userAutho, updateOnCart);
 router.delete('/:cid', emptyCart);
 router.delete('/products/:pid', passportCall('jwt'), userAutho, deleteFromCart);

@@ -1,7 +1,7 @@
 <section id="cart">
     <h1>Carrito de compras</h1>
     <div class="cart-container">
-        <article class="cartList">
+        <div class="cartList">
             {{#each products}}
             <div id="{{product._id}}" class="productCard">
                 <div class="imgContainer">
@@ -21,12 +21,19 @@
                         <span class="num">{{quantity}}</span>
                         <span class="plus">+</span>
                     </div>
-                    <div class="cartAmount"></div>
+                    <p>$ <span class="cartAmount"></span></p>
                     <buton class="deleteBtn">Eliminar</buton>
                 </div>
             </div>
             {{/each}}
-        </article>
+        </div>
+        {{#if isConfirm}}
+        <div class="purchaseInfo">
+            <h2>Resumen de compra</h2>
+            <p><span>Total: $ </span><span class="products-amount"></span></p>
+            <button class="purchase-confirm">Confirmar compra</button>
+        </div>
+        {{/if}}
     </div>
 </section>
 <script src="/socket.io/socket.io.js"></script>
