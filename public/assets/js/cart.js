@@ -57,7 +57,7 @@ const setCounterFunction = (method, btn, num, pid, stock) => {
                     updateAmount(pid);
                     updateTotalAmount();
                 } else {
-                    alert('Hubo un error al agregar el producto al carrito');
+                    alert('Hubo un error al actualizar el producto en el carrito');
                 }
 
             } catch (error) {
@@ -84,7 +84,7 @@ const setDeleteFunction = (btn, pid) => {
                 btn.parentElement.parentElement.style.display = 'none';
                 updateTotalAmount();
             } else {
-                alert('Hubo un error al agregar el producto al carrito');
+                alert('Hubo un error al elimiar el producto del carrito');
             }
 
         } catch (error) {
@@ -125,10 +125,18 @@ if (confirmBtn) {
 
                 if (response.ok) {
                     const result = await response.json();
-                    window.location.href = '/products'
-                    alert(`Compra realizada con exito. Su codigo de referencia es: \n${result.payload.code || 'Error al generar el codigo'}`);
+                    const { unprocessed } = result;
+                    if(unprocessed.length == 0) {
+                        window.location.href = '/products';
+                        alert(`Compra realizada con exito. Su codigo de referencia es: \n${result.payload.code || 'Error al generar el codigo'}`);
+                    } else {
+                        window.location.href = '/products';
+                        alert(`Compra realizada parcialmente. Su codigo de referencia es: \n${result.payload.code || 'Error al generar el codigo'} \nNo se procesaron los siguientes productos: \n${unprocessed.join('\n')}`);
+                    }
                 } else {
-                    alert('Hubo un error al agregar el producto al carrito');
+                    const result = await response.json();
+                    const { unprocessed } = result;
+                    alert(`No se pudieron procesar los siguientes productos: \n${unprocessed.join('\n')}`);
                 }
 
             } catch (error) {

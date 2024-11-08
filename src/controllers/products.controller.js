@@ -101,7 +101,7 @@ class ProductsController {
                 if(foundCode._id.toString() != pid) return res.status(409).send({status: 'error', message: 'Este codigo ya se encuentra registrado'});
             }
             
-            const response = await this.service.updateProduct(pid, body);
+            const response = await this.service.updateProduct({_id: pid}, body);
             
             return res.status(200).send({status: 'success', payload: response});
             

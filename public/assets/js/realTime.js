@@ -18,6 +18,7 @@ function updateProductList(lista) {
                 <li><span>code:</span> ${prod.code}</li>
                 <li><span>category:</span> ${prod.category}</li>
                 <li><span>stock:</span> ${prod.stock}</li>
+                <li><span>status:</span> ${prod.status}</li>
                 </ul>
                 <div class="crudBtnsContainer">
                     <button class="updateBtn">Modificar</button>

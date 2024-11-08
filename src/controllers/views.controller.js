@@ -22,8 +22,8 @@ class ViewsControllers {
     products = async (req, res) => {
         try {
             const { limit = 10, pageNum, query = '' } = req.query;
-            let filter = {};
-            if (query) filter = { category: query };
+            let filter = {status: true};
+            if (query) filter.category = query;
             let { sort } = req.query;
             sort == 'desc' ? sort = -1 : sort = 1;
 

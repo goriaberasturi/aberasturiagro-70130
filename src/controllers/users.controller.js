@@ -47,7 +47,7 @@ class UsersController {
             }
             const result = await this.uService.createUser(newUser);
 
-            await SessionsController.injectToken({id: result._id, cart: result.cart, role: result.role}, res);
+            await SessionsController.injectToken({id: result._id, cart: result.cart, email: result.email, role: result.role}, res);
         } catch (error) {
             console.log(error);
         }

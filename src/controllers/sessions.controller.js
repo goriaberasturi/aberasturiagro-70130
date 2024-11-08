@@ -29,7 +29,7 @@ class SessionsController {
                 return res.send({ status: 'error', error: 'El mail o la contraseña no coinciden' });
             }
 
-            await SessionsController.injectToken({ id: userFound._id, cart: userFound.cart, role: userFound.role }, res);
+            await SessionsController.injectToken({ id: userFound._id, cart: userFound.cart, email: userFound.email,role: userFound.role }, res);
     
         } catch (error) {
             console.log(error);

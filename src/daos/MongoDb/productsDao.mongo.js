@@ -10,7 +10,7 @@ class ProductsDaoMongo {
     get = async () => await this.model.find().lean();
     getBy = async opts => await this.model.findOne(opts);
     create = async newProduct => await this.model.create(newProduct);
-    update = async  (filter, prodData) => await this.model.findByIdAndUpdate(filter, prodData);
+    update = async  (filter, prodData) => await this.model.findOneAndUpdate(filter, prodData);
     delete = async id => await this.model.findOneAndDelete({_id: id});
     getLimited = async limit => await this.model.find().limit(limit);
     isValidId = async id => isValidObjectId(id);
