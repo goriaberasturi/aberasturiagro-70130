@@ -1,4 +1,5 @@
 import { productService, cartService, ticketService } from './../services/index.js';
+import { sendEmail } from './../utils/sendEmail.js';
 
 class CartsController {
     constructor() {
@@ -132,6 +133,17 @@ class CartsController {
                 });
     
                 const result = await this.tService.createTicket({amount, purchaser: req.user.email});
+
+                const html = `
+                <h1>Gracias por tu compra!</h1>
+                <h2>Estamos gestionando el envio de tus productos</h2>
+                <h2>Estos son los datos de su compra:</h2>
+                <p>Codigo de referencia: ${result.code}</p>
+                <p>Fecha y hora: ${result.purchase_datetime}</p>
+                <p>Monto total: $ ${result.amount}</p>
+                `;
+
+                await sendEmail({userClient: req.user.email, subject: 'Aberasturi Agro - Orden de compra', html});
 
                 return res.send({ status: 'success', payload: result, unprocessed });
             } else {

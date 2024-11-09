@@ -18,7 +18,9 @@ dotenv.config({
 const config = {
     port: process.env.PORT || 8080,
     private_key: process.env.PRIVATE_KEY,
-    persistence: process.env.PERSISTENCE
+    persistence: process.env.PERSISTENCE,
+    gmail_user: process.env.GMAIL_USER,
+    gmail_pass: process.env.GMAIL_PASS
 };
 
 
