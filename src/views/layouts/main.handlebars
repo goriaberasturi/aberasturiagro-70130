@@ -21,7 +21,23 @@
                 <a class="nav-link {{rtpLink}}" href="/realTimeProducts">En tiempo real</a>
             </div>
             {{#if isUser}}
-            <a id="{{cart}}" class="cart-logo {{cartLink}}" href="/cart/{{cart}}"><img src="../../../static/assets/img/carrito-de-compras.png" alt=""></a>
+            <a id="{{cart}}" class="user-logos" href="/cart/{{cart}}">
+                <img src=" /static/assets/img/carrito-de-compras.png" alt="">
+                <div class="cart-quantity">{{cartQty}}</div>
+            </a>
+            {{/if}}
+            {{#if showUserBtn}}
+            <div class="user-logos user"><img src="/static/assets/img/user.png" alt=""></div>
+            {{#if isLoggedIn}}
+            <ul class="dropdown">
+                <li class="logoutBtn"><a href="/api/sessions/logout">Logout</a></li>
+            </ul>
+            {{else}}
+            <ul class="dropdown">
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            </ul>
+            {{/if}}
             {{/if}}
         </div>
     </nav>

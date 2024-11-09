@@ -34,21 +34,32 @@ nav .nav-logo {
   font-weight: 500;
 }
 nav .nav-elements {
+  position: relative;
   height: 100%;
   display: flex;
 }
-nav .nav-elements .cart-logo {
+nav .nav-elements .user-logos {
+  position: relative;
   margin: 0 2em;
   display: flex;
   align-items: center;
   transition: all 0.2s ease-in-out;
 }
-nav .nav-elements .cart-logo img {
+nav .nav-elements .user-logos img {
   height: 70%;
   filter: invert(1);
 }
-nav .nav-elements .cart-logo:hover {
+nav .nav-elements .user-logos .cart-quantity {
+  position: absolute;
+  top: 0;
+  color: white;
+  right: -1em;
+}
+nav .nav-elements .user-logos:hover {
   transform: scale(1.1);
+}
+nav .nav-elements .user {
+  cursor: pointer;
 }
 nav .nav-elements .nav-links {
   height: 100%;
@@ -84,6 +95,40 @@ nav .nav-elements .nav-links .active {
 }
 nav .nav-elements .nav-links .active:hover {
   border-bottom: none;
+}
+nav .nav-elements .dropdown {
+  position: absolute;
+  top: 3em;
+  right: 0;
+  width: 17%;
+  list-style: none;
+  border-radius: 0 0 5px 5px;
+  overflow: hidden;
+  z-index: 999;
+  display: none;
+}
+nav .nav-elements .dropdown li {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: #ddd;
+  transition: all 0.2s linear;
+}
+nav .nav-elements .dropdown li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3em;
+  padding: 1.25em 1.5625em;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.1em;
+}
+nav .nav-elements .dropdown li:hover {
+  background-color: #aaa9a9;
 }
 
 body {

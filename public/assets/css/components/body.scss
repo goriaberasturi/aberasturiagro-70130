@@ -16,10 +16,12 @@ nav {
     }
 
     .nav-elements{
+        position: relative;
         height: 100%;
         display: flex;
 
-        .cart-logo {
+        .user-logos {
+            position: relative;
             margin: 0 2em;
             display: flex;
             align-items: center;
@@ -30,10 +32,22 @@ nav {
                 filter: invert(1);
             }
 
+            .cart-quantity {
+                position: absolute;
+                top: 0;
+                color: white;
+                right: -1em;
+            }
+
             &:hover {
                 transform: scale(1.1);
             }
         }
+        
+        .user {
+            cursor: pointer;
+        }
+
 
         .nav-links {
             height: 100%;
@@ -73,6 +87,44 @@ nav {
     
                 &:hover {
                     border-bottom: none;
+                }
+            }
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 3em;
+            right: 0;
+            width: 17%;
+            list-style: none;
+            border-radius: 0 0 5px 5px;
+            overflow: hidden;
+            z-index: 999;
+            display: none;
+            
+            li {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                background-color: #ddd;
+                transition: all .2s linear;
+                
+                a {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 3em;
+                    padding: 1.25em 1.5625em;
+                    color: black;
+                    text-decoration: none;
+                    text-align: center;
+                    font-size: 1.1em;
+                }
+
+                &:hover {
+                    background-color: #aaa9a9;
                 }
             }
         }

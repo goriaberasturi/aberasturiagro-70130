@@ -58,13 +58,19 @@ class ViewsControllers {
             const isCart = req.user ? true : false;
             const cart = isCart ? req.user.cart : null;
             const isUser = isCart ? req.user.role == 'user' : null;
+            const isLoggedIn = req.user ? true : false;
+            const userCart = await this.cService.getCart({_id: cart});
+            const cartQty = userCart.products.length
 
             res.render('home', {
                 docTitle: 'Home | Productos',
                 isMenu: true,
                 isCart,
+                cartQty,
+                isLoggedIn,
                 isUser,
                 prodLink: 'active',
+                showUserBtn: true,
                 products: docs,
                 cart,
                 prevPage,
@@ -83,10 +89,15 @@ class ViewsControllers {
     realTimeProducts = async (req, res) => {
         try {
             const { docs } = await this.pService.searchProducts({}, {});
+            const isLoggedIn = req.user ? true : false;
+
             res.render('realTimeProducts', {
                 docTitle: 'Productos | ABM',
                 isMenu: true,
                 rtpLink: 'active',
+                isCart: true,
+                showUserBtn: true,
+                isLoggedIn,
                 products: docs,
                 cart: req.user.cart
             });
@@ -103,10 +114,14 @@ class ViewsControllers {
             let isActive = product.status;
             isActive ? isActive = 'checked' : isActive = null;
 
+            const isLoggedIn = req.user ? true : false;
+
             res.render('editProducts', {
                 docTitle: 'Productos | Modificacion',
                 isMenu: true,
                 rtpLink: 'active',
+                showUserBtn: true,
+                isLoggedIn,
                 product,
                 isActive
             });
@@ -120,13 +135,16 @@ class ViewsControllers {
             const { cid } = req.params
             const cart = await this.cService.getCart({ _id: cid });
             const isConfirm = cart.products.length != 0;
+
+            const isLoggedIn = req.user ? true : false;
             
             res.render('cart', {
                 docTitle: 'Carrito',
                 isMenu: true,
                 isCart: false,
+                isLoggedIn,
                 isConfirm,
-                cartLink: 'active',
+                showUserBtn: true,
                 products: cart.products
             });
         } catch (error) {
@@ -139,7 +157,8 @@ class ViewsControllers {
             res.render('login', {
                 docTitle: 'Login',
                 isMenu: true,
-                isCart: false
+                isCart: false,
+                showUserBtn: false
             });
         } catch (error) {
             console.log(error);
@@ -151,7 +170,8 @@ class ViewsControllers {
             res.render('register', {
                 docTitle: 'Registrarse',
                 isMenu: true,
-                isCart: false
+                isCart: false,
+                showUserBtn: false
             });
         } catch (error) {
             console.log(error);

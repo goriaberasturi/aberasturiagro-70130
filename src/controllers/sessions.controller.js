@@ -17,6 +17,11 @@ class SessionsController {
         }).redirect('/products');
     }
 
+    logout = async (req, res) => {
+        res.clearCookie('token');
+        res.redirect('/login');
+    }
+
     login = async (req, res) => {
         try {
             console.log(req.user)
