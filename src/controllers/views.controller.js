@@ -1,4 +1,5 @@
 import { productService, cartService } from "./../services/index.js";
+import { config } from './../config/index.js';
 
 class ViewsControllers {
     constructor() {
@@ -39,8 +40,8 @@ class ViewsControllers {
             } = await this.pService.searchProducts(filter, search);
 
             // Base de prevLink y nextLink
-            let prevLink = `http://localhost:8080/products?pageNum=${page - 1}`;
-            let nextLink = `http://localhost:8080/products?pageNum=${page + 1}`;
+            let prevLink = `http://localhost:${config.port}/products?pageNum=${page - 1}`;
+            let nextLink = `http://localhost:${config.port}/products?pageNum=${page + 1}`;
 
             // Generacion de prevLink y nextLink
             for (let key in req.query) {

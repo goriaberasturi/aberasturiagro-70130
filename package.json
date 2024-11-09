@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon src/app.js",
+    "start": "nodemon src/app.js --mode production",
     "server": "node --watch src/app.js",
     "sass": "sass --watch public/assets/css/main.scss:public/assets/css/main.css",
     "dev": "concurrently \"nodemon src/app.js --mode development\" \"npm run sass\""
