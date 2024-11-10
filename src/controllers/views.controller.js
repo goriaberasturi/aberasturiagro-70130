@@ -61,7 +61,7 @@ class ViewsControllers {
             const isUser = isCart ? req.user.role == 'user' : null;
             const isLoggedIn = req.user ? true : false;
             const userCart = await this.cService.getCart({_id: cart});
-            const cartQty = userCart.products.length
+            const cartQty = isLoggedIn ? userCart.products.length : null;
 
             res.render('home', {
                 docTitle: 'Home | Productos',
